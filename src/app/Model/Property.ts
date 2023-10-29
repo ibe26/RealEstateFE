@@ -12,7 +12,9 @@ export interface PropertyDTO{
     propertyPrice:number,
     bedroomCount:number,
     bathroomCount:number,
-    size:number,
+    grossArea :number,
+    netArea :number,
+    dateListed:Date
 }
 
 export interface PropertyFilterDTO{
@@ -23,8 +25,10 @@ export interface PropertyFilterDTO{
     maxPrice :number,
     bedroomCount:number 
     bathroomCount :number,
-    size :number,
+    grossArea :number,
+    netArea :number,
     city :string ,
     district :string ,
-    quarter:string
+    quarter:string,
+    timeFilter:number
 }

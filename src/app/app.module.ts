@@ -3,18 +3,27 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PropertyListingTypeComponent } from './Component/property-listing-type/property-listing-type.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PropertyCardComponent } from './Component/Property/PropertyListing/property-card/property-card.component';
+import { PropertyListComponent } from './Component/Property/PropertyListing/property-list/property-list.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavbarComponent } from './Component/navbar/navbar.component';
+import { FilterBarComponent } from './Component/filter-bar/filter-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PropertyListingTypeComponent
+    PropertyCardComponent,
+    PropertyListComponent,
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    NavbarComponent,
+    FilterBarComponent,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
