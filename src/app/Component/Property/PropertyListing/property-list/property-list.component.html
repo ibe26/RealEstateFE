@@ -1,5 +1,3 @@
-<app-property-card></app-property-card>
-
 <div *ngFor="let property of propertyList$ | async">
-a
+    <app-property-card [property]="property"></app-property-card>
 </div>

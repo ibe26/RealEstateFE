@@ -11,6 +11,7 @@ import { PropertyService } from 'src/app/Service/property.service';
 })
 export class PropertyListComponent{
 
+  
   public _propertyService=inject(PropertyService);
   public propertyList$:Observable<Array<Property>>=this._propertyService.getList();
 
