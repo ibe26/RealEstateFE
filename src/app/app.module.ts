@@ -9,11 +9,12 @@ import { PropertyListComponent } from './Component/Property/PropertyListing/prop
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './Component/navbar/navbar.component';
 import { FilterBarComponent } from './Component/filter-bar/filter-bar.component';
+import { PropertyViewComponent } from './Component/Property/PropertyView/property-view.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PropertyCardComponent,
     PropertyListComponent,
   ],
   imports: [
@@ -23,6 +24,9 @@ import { FilterBarComponent } from './Component/filter-bar/filter-bar.component'
     BrowserAnimationsModule,
     NavbarComponent,
     FilterBarComponent,
+    PropertyCardComponent,
+    NgbModule,
+    PropertyViewComponent,
 
   ],
   providers: [],

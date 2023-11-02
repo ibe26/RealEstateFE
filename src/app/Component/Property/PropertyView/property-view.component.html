@@ -1,0 +1,17 @@
+<div style="width: 700px; height: 300px;">
+    <ngb-carousel
+	*ngIf="images$|async"
+	[showNavigationArrows]="true"
+	[showNavigationIndicators]="true"
+    [animation]="false"
+>
+<ng-template ngbSlide *ngFor="let image of images$|async">
+    <div class="picsum-img-wrapper">
+        <img [src]="image" style="height: 300px; width: 700px;" />
+    </div>
+</ng-template>
+</ngb-carousel>
+</div>
+
+
+<hr />
