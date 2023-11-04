@@ -11,11 +11,13 @@ import { NavbarComponent } from './Component/navbar/navbar.component';
 import { FilterBarComponent } from './Component/filter-bar/filter-bar.component';
 import { PropertyViewComponent } from './Component/Property/PropertyView/property-view.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LoadingScreenComponent } from './Component/loading-screen/loading-screen.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PropertyListComponent,
+    LoadingScreenComponent,
   ],
   imports: [
     HttpClientModule,

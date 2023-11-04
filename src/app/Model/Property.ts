@@ -1,3 +1,6 @@
+import { PropertyListingType } from "./PropertyListingType"
+import { PropertyType } from "./PropertyType"
+
 export interface Property extends PropertyDTO{
     propertyID:number
 }
@@ -8,12 +11,18 @@ export interface PropertyDTO{
     district:string,
     quarter:string,
     propertyTypeID:number,
+    propertyType:PropertyType,
     propertyListingTypeID:number,
+    propertyListingType:PropertyListingType,
     propertyPrice:number,
     bedroomCount:number,
     bathroomCount:number,
     grossArea :number,
     netArea :number,
+    balcony:boolean,
+    heatSystem:string,
+    dues:number,
+    description:string,
     dateListed:Date
 }
 
@@ -30,5 +39,7 @@ export interface PropertyFilterDTO{
     city :string ,
     district :string ,
     quarter:string,
-    timeFilter:number
+    timeFilter:number,
+    balcony:boolean,
+    heatSystem:string
 }
