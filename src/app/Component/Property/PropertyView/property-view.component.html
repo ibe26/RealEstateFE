@@ -71,7 +71,11 @@
             </tr>
 <tr>
                 <td>Balcony</td>
-                <td>{{((property$|async)!.propertyID)?'Available':'Not Available'}}</td>
+                <td>{{((property$|async)!.balcony)?'Available':'Not Available'}}</td>
+            </tr>
+<tr>
+                <td>Building Age</td>
+                <td>{{(currentYear-(property$|async)!.buildedYear)|yearPlural}}</td>
             </tr>
 
     </table>

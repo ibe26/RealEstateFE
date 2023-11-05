@@ -23,7 +23,9 @@ export interface PropertyDTO{
     heatSystem:string,
     dues:number,
     description:string,
-    dateListed:Date
+    dateListed:Date,
+    buildedYear:number
+
 }
 
 export interface PropertyFilterDTO{
@@ -41,5 +43,5 @@ export interface PropertyFilterDTO{
     quarter:string,
     timeFilter:number,
     balcony:boolean,
-    heatSystem:string
+    heatSystem:string,
 }

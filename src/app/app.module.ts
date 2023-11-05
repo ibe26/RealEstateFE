@@ -12,6 +12,7 @@ import { FilterBarComponent } from './Component/filter-bar/filter-bar.component'
 import { PropertyViewComponent } from './Component/Property/PropertyView/property-view.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoadingScreenComponent } from './Component/loading-screen/loading-screen.component';
+import { YearPluralPipe } from './Pipes/year-plural.pipe';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { LoadingScreenComponent } from './Component/loading-screen/loading-scree
     PropertyCardComponent,
     NgbModule,
     PropertyViewComponent,
+    YearPluralPipe,
 
   ],
   providers: [],
