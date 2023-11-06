@@ -13,6 +13,8 @@ import { PropertyViewComponent } from './Component/Property/PropertyView/propert
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoadingScreenComponent } from './Component/loading-screen/loading-screen.component';
 import { YearPluralPipe } from './Pipes/year-plural.pipe';
+import { PropertyTypeDropdownComponent } from './Component/Property/property-type-dropdown/property-type-dropdown.component';
+import { PropertyListingTypeDropdownComponent } from './Component/Property/property-listing-type-dropdown/property-listing-type-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { YearPluralPipe } from './Pipes/year-plural.pipe';
     PropertyCardComponent,
     NgbModule,
     PropertyViewComponent,
+    PropertyTypeDropdownComponent,
     YearPluralPipe,
+    PropertyListingTypeDropdownComponent,
 
   ],
   providers: [],

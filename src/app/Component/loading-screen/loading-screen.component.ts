@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-loading-screen',
@@ -10,25 +10,28 @@ public loadingString="";
   ngOnInit(){
     let interval=0;
     setInterval(()=>{
-      switch (interval%3) {
-        case 0:
-          console.log(interval)
-          this.loadingString="Loading.";
-          break;
-
-        case 1:
-          this.loadingString="Loading..";
-          break;
-
-        case 2:
-          this.loadingString="Loading...";
-          break;
-
-        default:
-          break;
+      if(interval<=60)
+      {
+         switch (interval%3) {
+          case 0:
+            console.log(interval)
+            this.loadingString="Loading.";
+            break;
+  
+          case 1:
+            this.loadingString="Loading..";
+            break;
+  
+          case 2:
+            this.loadingString="Loading...";
+            break;
+  
+          default:
+            break;
+        }
       }
-    interval++;
-
+       else clearInterval
+      interval++;
     },500)
   }
 }

@@ -34,14 +34,10 @@ export interface PropertyFilterDTO{
     propertyListingTypeID:number,
     minPrice :number,
     maxPrice :number,
-    bedroomCount:number 
-    bathroomCount :number,
-    grossArea :number,
-    netArea :number,
+    bedroomCount:number,
     city :string ,
     district :string ,
     quarter:string,
-    timeFilter:number,
     balcony:boolean,
     heatSystem:string,
 }
