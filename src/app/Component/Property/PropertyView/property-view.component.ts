@@ -16,7 +16,6 @@ import { YearPluralPipe } from 'src/app/Pipes/year-plural.pipe';
 })
 export class PropertyViewComponent {
 onInit(){
-  console.log(this.property$)
 }
   private readonly _propertyService=inject(PropertyService);
   private readonly _imageService=inject(ImageService);

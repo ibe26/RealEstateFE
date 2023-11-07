@@ -26,7 +26,6 @@ export class PropertyListingTypeDropdownComponent {
   
   public onChange(event:any){
 
-    console.log(event.value)
     this.PropertyListingTypeID.emit(event.value)
   }
 }

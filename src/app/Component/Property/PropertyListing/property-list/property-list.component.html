@@ -1,4 +1,7 @@
 <div *ngIf="propertyList$|async;else LoadingScreen">
+    <div *ngIf="(propertyList$|async)!.length===0">
+        <ng-container *ngTemplateOutlet="NoProperty"></ng-container>
+    </div>
     <div *ngFor="let property of propertyList$ | async">
         <app-property-card [property]="property"></app-property-card>
     </div>
@@ -8,4 +11,8 @@
 
 <ng-template #LoadingScreen>
     <app-loading-screen ></app-loading-screen>
+</ng-template>
+
+<ng-template #NoProperty>
+    <p>No property found.</p>
 </ng-template>

@@ -13,6 +13,8 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatAccordion, MatExpansionModule} from '@angular/material/expansion';
 import {MatRadioModule} from '@angular/material/radio';
 import { PropertyService } from 'src/app/Service/property.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Property } from 'src/app/Model/Property';
 
 
 
@@ -42,6 +44,8 @@ export class FilterBarComponent {
   @ViewChild(MatAccordion) accordion: MatAccordion | undefined;
   private _propertyService=inject(PropertyService)
   private formBuilder=inject(FormBuilder);
+  private router=inject(Router);
+
   public FilterForm:FormGroup=this.formBuilder.group({
     propertyName:[null],
     propertyTypeID:[0],
@@ -65,8 +69,14 @@ export class FilterBarComponent {
     }
 
     public Submit():void{
-      this._propertyService.getFilteredList(this.FilterForm.value).subscribe((data)=>{
-        console.log(data);
-      });
+      this._propertyService.getFilteredList(this.FilterForm.value).subscribe((data:Array<Property>)=>{
+        localStorage.setItem('filteredPropertyList',JSON.stringify(data));
+        if(this.router.url==='/filtered-list')
+        {
+          window.location.reload();
+        }
+        else this.router.navigate(['filtered-list']);
+
+      })
     }
 }

@@ -17,7 +17,6 @@ export class PropertyCardComponent implements OnInit {
   @Input() property!:Property;
 ngOnInit():void{
   this.images$=this._imageService.get(1);
-  console.log(this.isHovered)
   
 }
   private _imageService=inject(ImageService);

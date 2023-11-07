@@ -15,12 +15,16 @@ import { LoadingScreenComponent } from './Component/loading-screen/loading-scree
 import { YearPluralPipe } from './Pipes/year-plural.pipe';
 import { PropertyTypeDropdownComponent } from './Component/Property/property-type-dropdown/property-type-dropdown.component';
 import { PropertyListingTypeDropdownComponent } from './Component/Property/property-listing-type-dropdown/property-listing-type-dropdown.component';
+import { FilteredListComponent } from './Component/Property/PropertyListing/filtered-list/filtered-list.component';
+import { MainPageComponent } from './Component/Property/main-page/main-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PropertyListComponent,
     LoadingScreenComponent,
+    FilteredListComponent,
+    MainPageComponent,
   ],
   imports: [
     HttpClientModule,

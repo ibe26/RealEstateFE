@@ -32,4 +32,6 @@ export class PropertyService {
   public delete (id:number):Observable<number>{
     return this.httpClient.delete<number>(this.domain+API.deleteById+`${id}`)
   }
+
+  public propertyList$!:Observable<Array<Property>>;
 }

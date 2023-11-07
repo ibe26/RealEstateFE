@@ -14,7 +14,6 @@ public loadingString="";
       {
          switch (interval%3) {
           case 0:
-            console.log(interval)
             this.loadingString="Loading.";
             break;
   

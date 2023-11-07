@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, Input} from '@angular/core';
 import { inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Property } from 'src/app/Model/Property';
@@ -10,9 +10,6 @@ import { PropertyService } from 'src/app/Service/property.service';
   styleUrls: ['./property-list.component.css']
 })
 export class PropertyListComponent{
-
+@Input() propertyList$!:Observable<Array<Property>>;
   
-  public _propertyService=inject(PropertyService);
-  public propertyList$:Observable<Array<Property>>=this._propertyService.getList();
-
 }
