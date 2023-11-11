@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { inject } from '@angular/core';
 import { PropertyTypeService } from 'src/app/Service/property-type.service';
-import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
@@ -12,7 +11,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './property-type-dropdown.component.html',
   styleUrls: ['./property-type-dropdown.component.css'],
   standalone:true,
-  imports:[MatDatepickerModule,MatInputModule,MatFormFieldModule,MatSelectModule,CommonModule]
+  imports:[MatInputModule,MatFormFieldModule,MatSelectModule,CommonModule]
 })
 export class PropertyTypeDropdownComponent {
 

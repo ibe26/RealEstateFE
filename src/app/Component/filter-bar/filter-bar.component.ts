@@ -2,8 +2,8 @@ import { Component, ViewChild, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { PropertyTypeDropdownComponent } from '../Property/property-type-dropdown/property-type-dropdown.component';
-import { PropertyListingTypeDropdownComponent } from '../Property/property-listing-type-dropdown/property-listing-type-dropdown.component';
+import { PropertyTypeDropdownComponent } from '../Dropdowns/property-type-dropdown/property-type-dropdown.component';
+import { PropertyListingTypeDropdownComponent } from '../Dropdowns/property-listing-type-dropdown/property-listing-type-dropdown.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
@@ -13,8 +13,11 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatAccordion, MatExpansionModule} from '@angular/material/expansion';
 import {MatRadioModule} from '@angular/material/radio';
 import { PropertyService } from 'src/app/Service/property.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Property } from 'src/app/Model/Property';
+import { CityDropdownComponent } from '../Dropdowns/city-dropdown/city-dropdown.component';
+import { DistrictDropdownComponent } from '../Dropdowns/district-dropdown/district-dropdown.component';
+import { QuarterDropdownComponent } from '../Dropdowns/quarter-dropdown/quarter-dropdown.component';
 
 
 
@@ -37,7 +40,9 @@ import { Property } from 'src/app/Model/Property';
     MatDatepickerModule,
     MatNativeDateModule,
     MatRadioModule,
-    
+    CityDropdownComponent,
+    DistrictDropdownComponent,
+    QuarterDropdownComponent
   ],
 })
 export class FilterBarComponent {
@@ -53,9 +58,9 @@ export class FilterBarComponent {
     minPrice:[0],
     maxPrice:[0],
     bedroomCount:[0],
-    city:[null],
-    district:[null],
-    quarter:[null],
+    city:[undefined],
+    district:[undefined],
+    quarter:[undefined],
     timeFilter:[null],
     balcony:[null],
     heatSystem:[null],
@@ -69,6 +74,7 @@ export class FilterBarComponent {
     }
 
     public Submit():void{
+      console.log(this.FilterForm.value)
       this._propertyService.getFilteredList(this.FilterForm.value).subscribe((data:Array<Property>)=>{
         localStorage.setItem('filteredPropertyList',JSON.stringify(data));
         if(this.router.url==='/filtered-list')
@@ -79,4 +85,15 @@ export class FilterBarComponent {
 
       })
     }
+
+    public onCityChange($event:string){
+      this.FilterForm.controls['city'].setValue($event);
+    }
+    public onDistrictChange($event:string){
+      this.FilterForm.controls['district'].setValue($event);
+    }
+    public onQuarterChange($event:string){
+      this.FilterForm.controls['quarter'].setValue($event);
+    }
+    
 }

@@ -47,22 +47,9 @@
 
     </div>
     <div class="col-4">
-    <mat-form-field>
-      <mat-label>City</mat-label>
-      <input matInput
-      formControlName="city">
-    </mat-form-field>
-<mat-form-field>
-      <mat-label>District</mat-label>
-      <input matInput
-      formControlName="district">
-    </mat-form-field>
-<mat-form-field>
-      <mat-label>Quarter</mat-label>
-      <input matInput
-      formControlName="quarter">
-    </mat-form-field>
-
+    <app-city-dropdown (cityValueChange)="onCityChange($event)"></app-city-dropdown>
+    <app-district-dropdown [cityName]="FilterForm.value['city']" (districtValueChange)="onDistrictChange($event)"></app-district-dropdown>
+    <app-quarter-dropdown [cityNameAndDistrict]="{city:FilterForm.value['city'],district:FilterForm.value['district']}" (quarterValueChange)="onQuarterChange($event)"></app-quarter-dropdown>
     <mat-form-field>
       <mat-label>Bedroom(s)</mat-label>
       <input
@@ -87,8 +74,8 @@
     <div>
       <label>Balcony:</label>
       <mat-radio-group formControlName="balcony">
-        <mat-radio-button value=false>No</mat-radio-button>
-        <mat-radio-button value=true>Yes</mat-radio-button>
+        <mat-radio-button [value]=false>No</mat-radio-button>
+        <mat-radio-button [value]=true>Yes</mat-radio-button>
       </mat-radio-group>
     </div>
 

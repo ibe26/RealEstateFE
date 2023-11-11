@@ -13,10 +13,13 @@ import { PropertyViewComponent } from './Component/Property/PropertyView/propert
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoadingScreenComponent } from './Component/loading-screen/loading-screen.component';
 import { YearPluralPipe } from './Pipes/year-plural.pipe';
-import { PropertyTypeDropdownComponent } from './Component/Property/property-type-dropdown/property-type-dropdown.component';
-import { PropertyListingTypeDropdownComponent } from './Component/Property/property-listing-type-dropdown/property-listing-type-dropdown.component';
+import { PropertyTypeDropdownComponent } from './Component/Dropdowns/property-type-dropdown/property-type-dropdown.component';
+import { PropertyListingTypeDropdownComponent } from './Component/Dropdowns/property-listing-type-dropdown/property-listing-type-dropdown.component';
 import { FilteredListComponent } from './Component/Property/PropertyListing/filtered-list/filtered-list.component';
 import { MainPageComponent } from './Component/Property/main-page/main-page.component';
+import { CityDropdownComponent } from './Component/Dropdowns/city-dropdown/city-dropdown.component';
+import { DistrictDropdownComponent } from './Component/Dropdowns/district-dropdown/district-dropdown.component';
+import { QuarterDropdownComponent } from './Component/Dropdowns/quarter-dropdown/quarter-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,9 @@ import { MainPageComponent } from './Component/Property/main-page/main-page.comp
     PropertyTypeDropdownComponent,
     YearPluralPipe,
     PropertyListingTypeDropdownComponent,
-
+    CityDropdownComponent,
+    DistrictDropdownComponent,
+    QuarterDropdownComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
