@@ -1,103 +1,109 @@
 <div class="container">
-    <div class="row">
-        <div class="col-7">
-            <div class="row">
-                            <ng-container *ngTemplateOutlet="PhotoGallery"></ng-container>
-            </div>
-<div class="row">
-    <ng-container *ngTemplateOutlet="Description"></ng-container>
+  <div class="row">
+    <div class="col-7">
+      <div class="row">
+        <ng-container *ngTemplateOutlet="PhotoGallery"></ng-container>
+      </div>
+      <div class="row">
+        <ng-container *ngTemplateOutlet="Description"></ng-container>
 
-</div>
-        </div>
-        <div class="col-5">
-            <div class="col">
-                <span class="row" style="font-size: larger; color: #039;">
-                    {{(property$|async)!.propertyPrice|currency}}
-                </span>
-                <span class="row mt-3 mb-2" style="color: #039;">
-                    {{(property$|async)!.city}} / {{(property$|async)!.district}} / {{(property$|async)!.quarter}}
-                </span>
-
-            </div>
-            <ng-container *ngTemplateOutlet="Properties"></ng-container>
-        </div>
+      </div>
     </div>
+    <div class="col-5">
+      <div class="col">
+        <span class="row" style="font-size: larger; color: #039;">
+          {{(property$|async)!.propertyPrice|currency}}
+        </span>
+        <span class="row mt-3 mb-2" style="color: #039;">
+          {{(property$|async)!.city}} / {{(property$|async)!.district}} / {{(property$|async)!.quarter}}
+        </span>
+
+      </div>
+      <ng-container *ngTemplateOutlet="Properties"></ng-container>
+    </div>
+  </div>
 </div>
 
 
 <ng-template #Properties>
-    <table class="table table-striped" style="width: 75%;">
+  <table class="table table-striped" style="width: 75%;">
 
-    
-            <tr>
-                <td>Listing number</td>
-                <td>{{(property$|async)!.propertyID}}</td>
-            </tr>
-            <tr>
-                <td>Date Listed</td>
-                <td>{{(property$|async)!.dateListed|date:'longDate'}}</td>
-            </tr>
-<tr>
-                <td>Property Type</td>
-                <td>{{(property$|async)!.propertyType.propertyTypeName}}</td>
-            </tr>
-<tr>
-                <td>Listing Type</td>
-                <td style="font-weight: bold;">{{(property$|async)!.propertyListingType.propertyListingTypeName}}</td>
-            </tr>
-<tr>
-                <td>Bedroom</td>
-                <td>{{(property$|async)!.bedroomCount}}</td>
-            </tr>
-<tr>
-                <td>Bathroom</td>
-                <td>{{(property$|async)!.bathroomCount}}</td>
-            </tr>
-<tr>
-                <td>m² (Gross)</td>
-                <td>{{(property$|async)!.grossArea}}</td>
-            </tr>
-<tr>
-                <td>m² (Net)</td>
-                <td>{{(property$|async)!.netArea}}</td>
-            </tr>
-<tr>
-                <td>Dues</td>
-                <td>{{(property$|async)!.dues|currency}}</td>
-            </tr>
-<tr>
-                <td>Heating System</td>
-                <td>{{(property$|async)!.heatSystem}}</td>
-            </tr>
-<tr>
-                <td>Balcony</td>
-                <td>{{((property$|async)!.balcony)?'Available':'Not Available'}}</td>
-            </tr>
-<tr>
-                <td>Building Age</td>
-                <td>{{(currentYear-(property$|async)!.buildedYear)|yearPlural}}</td>
-            </tr>
 
-    </table>
+    <tr>
+      <td>Listing number</td>
+      <td>{{(property$|async)!.propertyID}}</td>
+    </tr>
+    <tr>
+      <td>Date Listed</td>
+      <td>{{(property$|async)!.dateListed|date:'longDate'}}</td>
+    </tr>
+    <tr>
+      <td>Property Type</td>
+      <td>{{(property$|async)!.propertyType.propertyTypeName}}</td>
+    </tr>
+    <tr>
+      <td>Listing Type</td>
+      <td style="font-weight: bold;">{{(property$|async)!.propertyListingType.propertyListingTypeName}}</td>
+    </tr>
+    <tr>
+      <td>Bedroom</td>
+      <td>{{(property$|async)!.bedroomCount}}</td>
+    </tr>
+    <tr>
+      <td>Bathroom</td>
+      <td>{{(property$|async)!.bathroomCount}}</td>
+    </tr>
+    <tr>
+      <td>m² (Gross)</td>
+      <td>{{(property$|async)!.grossArea}}</td>
+    </tr>
+    <tr>
+      <td>m² (Net)</td>
+      <td>{{(property$|async)!.netArea}}</td>
+    </tr>
+    <tr>
+      <td>Dues</td>
+      <td>{{(property$|async)!.dues|currency}}</td>
+    </tr>
+    <tr>
+      <td>Heating System</td>
+      <td>{{(property$|async)!.heatSystem}}</td>
+    </tr>
+    <tr>
+      <td>Balcony</td>
+      <td>{{((property$|async)!.balcony)?'Available':'Not Available'}}</td>
+    </tr>
+    <tr>
+      <td>Building Age</td>
+      <td>{{(currentYear-(property$|async)!.buildedYear)|yearPlural}}</td>
+    </tr>
+    <tr>
+      <td>Floor</td>
+      <td>{{(((property$|async)!.floor !==null)?(property$|async)!.floor:"-")}}</td>
+    </tr>
+    <tr>
+        <td>Building Total Floor Count</td>
+        <td>{{(((property$|async)!.totalFloor !==null)?(property$|async)!.totalFloor:"-")}}</td>
+      </tr>
+
+  </table>
 </ng-template>
 <ng-template #PhotoGallery>
-    <div style="width: 700px; height: 300px;">
-        <ngb-carousel
-        *ngIf="images$|async"
-        [showNavigationArrows]="true"
-        [showNavigationIndicators]="true"
-        [animation]="false"
-    >
-    <ng-template ngbSlide *ngFor="let image of images$|async">
+  <div style="width: 700px; height: 300px;">
+    <ngb-carousel *ngIf="images$|async" [showNavigationArrows]="true" [showNavigationIndicators]="true"
+      [animation]="false">
+      <ng-template ngbSlide *ngFor="let image of images$|async">
         <div class="picsum-img-wrapper">
-            <img [src]="image" style="height: 300px; width: 700px;" />
+          <img [src]="image" style="height: 300px; width: 700px;" />
         </div>
-    </ng-template>
+      </ng-template>
     </ngb-carousel>
-    </div>
+  </div>
 </ng-template>
 <ng-template #Description>
-    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
-        <mat-tab label="Description"><p class="mt-3">{{(property$|async)!.description}} </p> </mat-tab>
-      </mat-tab-group>
+  <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+    <mat-tab label="Description">
+      <p class="mt-3">{{(property$|async)!.description}} </p>
+    </mat-tab>
+  </mat-tab-group>
 </ng-template>

@@ -61,17 +61,10 @@ export class FilterBarComponent {
     city:[undefined],
     district:[undefined],
     quarter:[undefined],
-    timeFilter:[null],
     balcony:[null],
     heatSystem:[null],
-
   })
-  public onTypeChange($event: number) {
-    this.FilterForm.controls['propertyTypeID'].setValue($event);
-  }
-  public onListingTypeChange($event: number) {
-    this.FilterForm.controls['propertyListingTypeID'].setValue($event);
-    }
+  
 
     public Submit():void{
       console.log(this.FilterForm.value)
@@ -86,6 +79,12 @@ export class FilterBarComponent {
       })
     }
 
+    public onTypeChange($event: number) {
+      this.FilterForm.controls['propertyTypeID'].setValue($event);
+    }
+    public onListingTypeChange($event: number) {
+      this.FilterForm.controls['propertyListingTypeID'].setValue($event);
+    }
     public onCityChange($event:string){
       this.FilterForm.controls['city'].setValue($event);
     }

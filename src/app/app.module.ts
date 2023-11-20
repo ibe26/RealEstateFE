@@ -20,6 +20,7 @@ import { MainPageComponent } from './Component/Property/main-page/main-page.comp
 import { CityDropdownComponent } from './Component/Dropdowns/city-dropdown/city-dropdown.component';
 import { DistrictDropdownComponent } from './Component/Dropdowns/district-dropdown/district-dropdown.component';
 import { QuarterDropdownComponent } from './Component/Dropdowns/quarter-dropdown/quarter-dropdown.component';
+import { AddPropertyComponent } from './Component/Property/add-property/add-property.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { QuarterDropdownComponent } from './Component/Dropdowns/quarter-dropdown
     PropertyListingTypeDropdownComponent,
     CityDropdownComponent,
     DistrictDropdownComponent,
+    AddPropertyComponent,
     QuarterDropdownComponent,
   ],
   providers: [],

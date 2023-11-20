@@ -24,8 +24,9 @@ export interface PropertyDTO{
     dues:number,
     description:string,
     dateListed:Date,
-    buildedYear:number
-
+    buildedYear:number,
+    floor:number,
+    totalFloor:number
 }
 
 export interface PropertyFilterDTO{
