@@ -14,6 +14,8 @@ import { PropertyListingTypeDropdownComponent } from
 import { PropertyTypeDropdownComponent } from '../../Dropdowns/property-type-dropdown/property-type-dropdown.component';
 import { QuarterDropdownComponent } from '../../Dropdowns/quarter-dropdown/quarter-dropdown.component';
 import { Router } from '@angular/router';
+import { PropertyListingTypeService } from 'src/app/Service/property-listing-type.service';
+import { PropertyListingType } from 'src/app/Model/PropertyListingType';
 
 @Component({
 selector: 'app-add-property',
@@ -37,10 +39,19 @@ MatTabsModule
 ]
 })
 export class AddPropertyComponent {
+    
+    ngOnInit():void{
+        this.propertyListingTypeService.getList().subscribe((data:Array<PropertyListingType>)=>{
+            this.propertyListingTypes=data;
+        })
+    }
 private formBuilder=inject(FormBuilder);
+public propertyListingTypeService=inject(PropertyListingTypeService);
 private router=inject(Router);
-public selectedIndex=0;
 
+private propertyListingTypes:Array<PropertyListingType>=[];
+public currentPropertyListingType:string="sale";
+public selectedIndex=0;
 public PropertyForm:FormGroup=this.formBuilder.group({
 propertyName:[null, [Validators.required]],
 propertyTypeID:[null, [Validators.required]],
@@ -71,11 +82,18 @@ public get IsBasicFormValid():boolean{
            this.PropertyForm.get('balcony')?.valid!
 }
 
+// public get propertyListingTypeName():string{
+//     this.propertyListingTypeService.getList().
+// }
+
 public onTypeChange($event: number) {
 this.PropertyForm.controls['propertyTypeID'].setValue($event);
 }
 public onListingTypeChange($event: number) {
 this.PropertyForm.controls['propertyListingTypeID'].setValue($event);
+this.currentPropertyListingType=this.propertyListingTypes.find(lpt=>lpt.propertyListingTypeID===$event)?.propertyListingTypeName!;
+
+
 }
 public onCityChange($event:string){
 this.PropertyForm.controls['city'].setValue($event);

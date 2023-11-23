@@ -1,0 +1,11 @@
+.example-button-row {
+    display: table-cell;
+    max-width: 600px;
+  }
+button{
+    width: 300px;
+}
+section {
+    display: table;
+  }
+  
