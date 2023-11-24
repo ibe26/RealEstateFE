@@ -20,24 +20,24 @@
 
 
 <ng-template [formGroup]="PropertyForm" #BasicInfoContent>
-  <div class="col-8 mt-4">
+  <div  class="col-8 mt-4" >
     <div class="row">
-      <h2 style="font-weight: 500; margin-left: 5px;">Title*</h2>
+      <h2 >Title*</h2>
       <mat-form-field>
         <input matInput type="text" placeholder="Property Title" formControlName="propertyName">
       </mat-form-field>
     </div>
     <div class="row">
-      <h2 style="font-weight: 500; margin-left: 5px;">I want to*</h2>
+      <h2 >I want to*</h2>
       <app-property-listing-type-dropdown (PropertyListingTypeID)="onListingTypeChange($event)">
       </app-property-listing-type-dropdown>
     </div> <div class="row">
-      <h2 style="font-weight: 500; margin-left: 5px;">Type of Property*</h2>
+      <h2 >Type of Property*</h2>
       <app-property-type-dropdown (PropertyTypeID)="onTypeChange($event)">
       </app-property-type-dropdown>
     </div>
     <div class="row">
-      <h2 style="font-weight: 500; margin-left: 5px;">Bedroom(s)*</h2>
+      <h2 >Bedroom(s)*</h2>
       <mat-form-field style="width: 28%;">
         <input matInput required type="number" formControlName="bedroomCount" type="number" min="0" max="20" onkeypress="return false"
           ondragStart="return false" onselectstart="return false" oncut="return false" oncopy="return false"
@@ -46,7 +46,7 @@
       </mat-form-field>
     </div>
     <div class="row">
-      <h2 style="font-weight: 500; margin-left: 5px;">Bathroom(s)*</h2>
+      <h2 >Bathroom(s)*</h2>
       <mat-form-field style="width: 28%;">
         <input matInput required type="number" formControlName="bathroomCount" type="number" min="0" max="20" onkeypress="return false"
           ondragStart="return false" onselectstart="return false" oncut="return false" oncopy="return false"
@@ -55,53 +55,72 @@
       </mat-form-field>
     </div>
     <div class="row">
-      <h2 style="font-weight: 500; margin-left: 5px;">Balcony*</h2>
-      <mat-radio-group required formControlName="balcony">
+      <h2 >Balcony*</h2>
+      <mat-radio-group class="mb-3" required formControlName="balcony">
         <mat-radio-button [value]=false>No</mat-radio-button>
         <mat-radio-button [value]=true>Yes</mat-radio-button>
       </mat-radio-group>
     </div>
     <div class="row">
-        <h2 style="font-weight: 500; margin-left: 5px;">Floor</h2>
+      <h2 >Heat System*</h2>
+      <app-heat-systems-dropdown (heatSystemsValueChange)="onHeatSystemsChange($event)"></app-heat-systems-dropdown>
+    </div>
+    <div class="row">
+      <h2>Builded Year</h2>
+      <mat-form-field style="width: 28%;">
+        <mat-label>Builded Year</mat-label>
+    <mat-select formControlName="buildedYear">
+        <mat-option *ngFor="let year of yearList" [value]="year">{{year}}</mat-option>
+    </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="row">
+        <h2 >Floor</h2>
         <mat-form-field style="width: 28%;">
             <input matInput required type="number" formControlName="floor" min="0" >
           </mat-form-field>
     </div>
     <div class="row">
-        <h2 style="font-weight: 500; margin-left: 5px;">Building Floors</h2>
+        <h2>Building Floors</h2>
         <mat-form-field style="width: 28%;">
           <input matInput required type="number" formControlName="price" min="0" >
         </mat-form-field>
     </div>
+    
     <div class="row">
-      <h2 style="font-weight: 500; margin-left: 5px;">Description</h2>
+      <h2 >Description</h2>
       <mat-form-field style="width: 75%; height: 200%;">
         <textarea matInput cdkTextareaAutosize placeholder="Description..." formControlName="description"></textarea>
       </mat-form-field>
       <button mat-button [disabled]="!IsBasicFormValid" (click)="selectedIndex=selectedIndex+1" style="width: 20%;">Next</button>
     </div>
+    
   </div>
 </ng-template>
 <ng-template [formGroup]="PropertyForm" #PricingAndArea>
   <div class="col-8 mt-4">
     <div class="row">
-      <h2 *ngIf="currentPropertyListingType.toLowerCase()==='rent'" style="font-weight: 500; margin-left: 5px;">I want to rent out for*</h2>
-      <h2 *ngIf="currentPropertyListingType.toLowerCase()==='sale'" style="font-weight: 500; margin-left: 5px;">I want to sell for*</h2>
-      <span>
-        
-      </span><h2 *ngIf="currentPropertyListingType.toLowerCase()==='other'" style="font-weight: 500; margin-left: 5px;">Price*</h2>
+      <h2 *ngIf="currentPropertyListingType.toLowerCase()==='sale'" >I want to sell for ($)*</h2>
+      <h2 *ngIf="currentPropertyListingType.toLowerCase()==='rent'" >I want to rent out for ($)*</h2>
+      <h2 *ngIf="currentPropertyListingType.toLowerCase()==='other'" >Price ($)*</h2>
       <mat-form-field style="width: 28%;">
         <input matInput required type="number" placeholder="Price" formControlName="price">
       </mat-form-field>
     </div>
     <div class="row">
-      <h2 style="font-weight: 500; margin-left: 5px;">Gross Area m²*</h2>
+      <h2>Dues ($)*</h2>
+      <mat-form-field style="width: 28%;">
+        <input matInput required type="number" placeholder="Dues" formControlName="Dues">
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <h2 >Gross Area m²*</h2>
       <mat-form-field style="width: 28%;">
         <input matInput required type="number" placeholder="Ex: 100" formControlName="grossArea">
       </mat-form-field>
     </div>
      <div class="row">
-      <h2 style="font-weight: 500; margin-left: 5px;">Net Area m²*</h2>
+      <h2 >Net Area m²*</h2>
       <mat-form-field style="width: 28%;">
         <input matInput required type="number" placeholder="Ex: 100" formControlName="netArea">
       </mat-form-field>
@@ -115,8 +134,6 @@
       </section>
 
     </div>
-    
-    
     
   </div>
 </ng-template>

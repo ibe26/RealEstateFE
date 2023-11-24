@@ -21,6 +21,7 @@ import { CityDropdownComponent } from './Component/Dropdowns/city-dropdown/city-
 import { DistrictDropdownComponent } from './Component/Dropdowns/district-dropdown/district-dropdown.component';
 import { QuarterDropdownComponent } from './Component/Dropdowns/quarter-dropdown/quarter-dropdown.component';
 import { AddPropertyComponent } from './Component/Property/add-property/add-property.component';
+import { HeatSystemsDropdownComponent } from './Component/Dropdowns/heat-systems-dropdown/heat-systems-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { AddPropertyComponent } from './Component/Property/add-property/add-prop
     DistrictDropdownComponent,
     AddPropertyComponent,
     QuarterDropdownComponent,
+    HeatSystemsDropdownComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

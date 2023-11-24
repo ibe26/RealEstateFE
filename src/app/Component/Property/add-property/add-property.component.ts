@@ -16,6 +16,8 @@ import { QuarterDropdownComponent } from '../../Dropdowns/quarter-dropdown/quart
 import { Router } from '@angular/router';
 import { PropertyListingTypeService } from 'src/app/Service/property-listing-type.service';
 import { PropertyListingType } from 'src/app/Model/PropertyListingType';
+import { HeatSystemsDropdownComponent } from '../../Dropdowns/heat-systems-dropdown/heat-systems-dropdown.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
 selector: 'app-add-property',
@@ -35,7 +37,9 @@ MatRadioModule,
 CityDropdownComponent,
 DistrictDropdownComponent,
 QuarterDropdownComponent,
-MatTabsModule
+MatTabsModule,
+HeatSystemsDropdownComponent,
+MatSelectModule
 ]
 })
 export class AddPropertyComponent {
@@ -44,6 +48,12 @@ export class AddPropertyComponent {
         this.propertyListingTypeService.getList().subscribe((data:Array<PropertyListingType>)=>{
             this.propertyListingTypes=data;
         })
+        let year=new Date().getFullYear();
+        for (let index = 0; year-index >= 1900; index++) {
+            this.yearList[index]=year-index;
+            
+        }
+
     }
 private formBuilder=inject(FormBuilder);
 public propertyListingTypeService=inject(PropertyListingTypeService);
@@ -52,6 +62,7 @@ private router=inject(Router);
 private propertyListingTypes:Array<PropertyListingType>=[];
 public currentPropertyListingType:string="sale";
 public selectedIndex=0;
+public yearList:Array<number>=[];
 public PropertyForm:FormGroup=this.formBuilder.group({
 propertyName:[null, [Validators.required]],
 propertyTypeID:[null, [Validators.required]],
@@ -79,7 +90,9 @@ public get IsBasicFormValid():boolean{
            this.PropertyForm.get('propertyListingTypeID')?.valid! &&
            this.PropertyForm.get('bedroomCount')?.valid! &&
            this.PropertyForm.get('bathroomCount')?.valid! &&
-           this.PropertyForm.get('balcony')?.valid!
+           this.PropertyForm.get('balcony')?.valid! &&
+           this.PropertyForm.get('buildedYear')?.valid! &&
+           this.PropertyForm.get('heatSystem')?.valid!
 }
 
 // public get propertyListingTypeName():string{
@@ -103,6 +116,9 @@ this.PropertyForm.controls['district'].setValue($event);
 }
 public onQuarterChange($event:string){
 this.PropertyForm.controls['quarter'].setValue($event);
+}
+public onHeatSystemsChange($event:string){
+    this.PropertyForm.controls['heatSystem'].setValue($event);
 }
 public onSubmit(){
   

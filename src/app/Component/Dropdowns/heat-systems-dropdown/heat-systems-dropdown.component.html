@@ -1,0 +1,6 @@
+<mat-form-field>
+    <mat-label>Heat System</mat-label>
+    <mat-select (selectionChange)="onChange($event)">
+        <mat-option  *ngFor="let heatSystem of heatSystems" [value]="heatSystem">{{heatSystem}}</mat-option>
+    </mat-select>
+  </mat-form-field>
