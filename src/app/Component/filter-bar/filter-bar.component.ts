@@ -2,8 +2,6 @@ import { Component, ViewChild, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { PropertyTypeDropdownComponent } from '../Dropdowns/property-type-dropdown/property-type-dropdown.component';
-import { PropertyListingTypeDropdownComponent } from '../Dropdowns/property-listing-type-dropdown/property-listing-type-dropdown.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
@@ -15,9 +13,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import { PropertyService } from 'src/app/Service/property.service';
 import { Router } from '@angular/router';
 import { Property } from 'src/app/Model/Property';
-import { CityDropdownComponent } from '../Dropdowns/city-dropdown/city-dropdown.component';
-import { DistrictDropdownComponent } from '../Dropdowns/district-dropdown/district-dropdown.component';
-import { QuarterDropdownComponent } from '../Dropdowns/quarter-dropdown/quarter-dropdown.component';
+import { AddressModule } from 'src/app/Modules/address/address.module';
+import { PropertyTypesModule } from 'src/app/Modules/property-types/property-types.module';
 
 
 
@@ -28,8 +25,7 @@ import { QuarterDropdownComponent } from '../Dropdowns/quarter-dropdown/quarter-
   standalone: true,
   imports: [MatToolbarModule,
     MatButtonModule,
-    PropertyTypeDropdownComponent,
-    PropertyListingTypeDropdownComponent,
+    PropertyTypesModule,
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
@@ -40,9 +36,7 @@ import { QuarterDropdownComponent } from '../Dropdowns/quarter-dropdown/quarter-
     MatDatepickerModule,
     MatNativeDateModule,
     MatRadioModule,
-    CityDropdownComponent,
-    DistrictDropdownComponent,
-    QuarterDropdownComponent
+    AddressModule
   ],
 })
 export class FilterBarComponent {

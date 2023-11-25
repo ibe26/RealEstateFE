@@ -13,15 +13,11 @@ import { PropertyViewComponent } from './Component/Property/PropertyView/propert
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoadingScreenComponent } from './Component/loading-screen/loading-screen.component';
 import { YearPluralPipe } from './Pipes/year-plural.pipe';
-import { PropertyTypeDropdownComponent } from './Component/Dropdowns/property-type-dropdown/property-type-dropdown.component';
-import { PropertyListingTypeDropdownComponent } from './Component/Dropdowns/property-listing-type-dropdown/property-listing-type-dropdown.component';
 import { FilteredListComponent } from './Component/Property/PropertyListing/filtered-list/filtered-list.component';
 import { MainPageComponent } from './Component/Property/main-page/main-page.component';
-import { CityDropdownComponent } from './Component/Dropdowns/city-dropdown/city-dropdown.component';
-import { DistrictDropdownComponent } from './Component/Dropdowns/district-dropdown/district-dropdown.component';
-import { QuarterDropdownComponent } from './Component/Dropdowns/quarter-dropdown/quarter-dropdown.component';
 import { AddPropertyComponent } from './Component/Property/add-property/add-property.component';
 import { HeatSystemsDropdownComponent } from './Component/Dropdowns/heat-systems-dropdown/heat-systems-dropdown.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -32,22 +28,18 @@ import { HeatSystemsDropdownComponent } from './Component/Dropdowns/heat-systems
     MainPageComponent,
   ],
   imports: [
+    NgbModule,
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FileUploadModule,
     NavbarComponent,
     FilterBarComponent,
     PropertyCardComponent,
-    NgbModule,
     PropertyViewComponent,
-    PropertyTypeDropdownComponent,
     YearPluralPipe,
-    PropertyListingTypeDropdownComponent,
-    CityDropdownComponent,
-    DistrictDropdownComponent,
     AddPropertyComponent,
-    QuarterDropdownComponent,
     HeatSystemsDropdownComponent,
   ],
   providers: [],

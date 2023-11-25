@@ -7,17 +7,16 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { CityDropdownComponent } from '../../Dropdowns/city-dropdown/city-dropdown.component';
-import { DistrictDropdownComponent } from '../../Dropdowns/district-dropdown/district-dropdown.component';
-import { PropertyListingTypeDropdownComponent } from
-'../../Dropdowns/property-listing-type-dropdown/property-listing-type-dropdown.component';
-import { PropertyTypeDropdownComponent } from '../../Dropdowns/property-type-dropdown/property-type-dropdown.component';
-import { QuarterDropdownComponent } from '../../Dropdowns/quarter-dropdown/quarter-dropdown.component';
 import { Router } from '@angular/router';
 import { PropertyListingTypeService } from 'src/app/Service/property-listing-type.service';
 import { PropertyListingType } from 'src/app/Model/PropertyListingType';
 import { HeatSystemsDropdownComponent } from '../../Dropdowns/heat-systems-dropdown/heat-systems-dropdown.component';
 import { MatSelectModule } from '@angular/material/select';
+import { AddressModule } from 'src/app/Modules/address/address.module';
+import { PropertyTypesModule } from 'src/app/Modules/property-types/property-types.module';
+import alertify from 'alertifyjs';
+import { PropertyService } from 'src/app/Service/property.service';
+import { Property } from 'src/app/Model/Property';
 
 @Component({
 selector: 'app-add-property',
@@ -26,101 +25,124 @@ styleUrls: ['./add-property.component.css'],
 standalone: true,
 imports: [MatToolbarModule,
 MatButtonModule,
-PropertyTypeDropdownComponent,
-PropertyListingTypeDropdownComponent,
+AddressModule,
+PropertyTypesModule,
 MatFormFieldModule,
 MatInputModule,
 FormsModule,
 ReactiveFormsModule,
 CommonModule,
 MatRadioModule,
-CityDropdownComponent,
-DistrictDropdownComponent,
-QuarterDropdownComponent,
 MatTabsModule,
 HeatSystemsDropdownComponent,
 MatSelectModule
 ]
 })
 export class AddPropertyComponent {
-    
-    ngOnInit():void{
-        this.propertyListingTypeService.getList().subscribe((data:Array<PropertyListingType>)=>{
-            this.propertyListingTypes=data;
-        })
-        let year=new Date().getFullYear();
-        for (let index = 0; year-index >= 1900; index++) {
-            this.yearList[index]=year-index;
-            
-        }
 
-    }
-private formBuilder=inject(FormBuilder);
-public propertyListingTypeService=inject(PropertyListingTypeService);
-private router=inject(Router);
+ngOnInit():void{
+this.propertyListingTypeService.getList().subscribe((data:Array<PropertyListingType>)=>{
+  this.propertyListingTypes=data;
+  })
+  let year=new Date().getFullYear();
+  for (let index = 0; year-index >= 1900; index++) {
+  this.yearList[index]=year-index;
 
-private propertyListingTypes:Array<PropertyListingType>=[];
-public currentPropertyListingType:string="sale";
-public selectedIndex=0;
-public yearList:Array<number>=[];
-public PropertyForm:FormGroup=this.formBuilder.group({
-propertyName:[null, [Validators.required]],
-propertyTypeID:[null, [Validators.required]],
-propertyListingTypeID:[null, [Validators.required]],
-price:[null, [Validators.required]],
-bedroomCount:[null, [Validators.required]],
-bathroomCount:[null, [Validators.required]],
-grossArea:[null, [Validators.required]],
-netArea:[null, [Validators.required]],
-city:[undefined],
-district:[undefined],
-quarter:[undefined],
-dues:[null, [Validators.required]],
-balcony:[null, [Validators.required]],
-heatSystem:[null, [Validators.required]],
-buildedYear:[null, [Validators.required]],
-description:[null],
-floor:[null],
-totalFloor:[null]
-})
+  }
+  }
 
-public get IsBasicFormValid():boolean{
-    return this.PropertyForm.get('propertyName')?.valid! &&
-           this.PropertyForm.get('propertyTypeID')?.valid! &&
-           this.PropertyForm.get('propertyListingTypeID')?.valid! &&
-           this.PropertyForm.get('bedroomCount')?.valid! &&
-           this.PropertyForm.get('bathroomCount')?.valid! &&
-           this.PropertyForm.get('balcony')?.valid! &&
-           this.PropertyForm.get('buildedYear')?.valid! &&
-           this.PropertyForm.get('heatSystem')?.valid!
-}
+  private formBuilder=inject(FormBuilder);
+  private propertyListingTypeService=inject(PropertyListingTypeService);
+  private propertyService=inject(PropertyService);
+  private router=inject(Router);
 
-// public get propertyListingTypeName():string{
-//     this.propertyListingTypeService.getList().
-// }
+  private propertyListingTypes:Array<PropertyListingType>=[];
+    public currentPropertyListingType:string="sale";
+    public selectedIndex=0;
+    public yearList:Array<number>=[];
 
-public onTypeChange($event: number) {
-this.PropertyForm.controls['propertyTypeID'].setValue($event);
-}
-public onListingTypeChange($event: number) {
-this.PropertyForm.controls['propertyListingTypeID'].setValue($event);
-this.currentPropertyListingType=this.propertyListingTypes.find(lpt=>lpt.propertyListingTypeID===$event)?.propertyListingTypeName!;
+      // public readonly maxAllowedFileSize=10*1024*1024;
+      // private uploader!:FileUploader;
+
+      // private initializeFileUploader(propertyID:number){
+      // this.uploader=new FileUploader({
+      // url:API.domainUrl+API.uploadImages+propertyID+'/',
+      // isHTML5:true,
+      // allowedFileType:['image'],
+      // removeAfterUpload:true,
+      // autoUpload:true,
+      // maxFileSize: this.maxAllowedFileSize
+      // })
+      // }
+
+      public PropertyForm:FormGroup=this.formBuilder.group({
+      propertyName:[null, [Validators.required]],
+      propertyTypeID:[null, [Validators.required]],
+      propertyListingTypeID:[null, [Validators.required]],
+      propertyPrice:[null, [Validators.required]],
+      bedroomCount:[null, [Validators.required]],
+      bathroomCount:[null, [Validators.required]],
+      grossArea:[null, [Validators.required]],
+      netArea:[null, [Validators.required]],
+      city:[undefined, [Validators.required]],
+      district:[undefined, [Validators.required]],
+      quarter:[undefined, [Validators.required]],
+      dues:[null, [Validators.required]],
+      balcony:[null, [Validators.required]],
+      heatSystem:[null, [Validators.required]],
+      buildedYear:[null, [Validators.required]],
+      description:[null],
+      floor:[null],
+      totalFloor:[null]
+      })
+
+      public onTypeChange($event: number) {
+      this.PropertyForm.controls['propertyTypeID'].setValue($event);
+      }
+      public onListingTypeChange($event: number) {
+      this.PropertyForm.controls['propertyListingTypeID'].setValue($event);
+      this.currentPropertyListingType=this.propertyListingTypes.find(lpt=>lpt.propertyListingTypeID===$event)?.propertyListingTypeName!;
+
+      }
+      public onCityChange($event:string){
+      this.PropertyForm.controls['city'].setValue($event);
+      }
+      public onDistrictChange($event:string){
+      this.PropertyForm.controls['district'].setValue($event);
+      }
+      public onQuarterChange($event:string){
+      this.PropertyForm.controls['quarter'].setValue($event);
+      }
+      public onHeatSystemsChange($event:string){
+      this.PropertyForm.controls['heatSystem'].setValue($event);
+      }
+      public onSubmit(){
+      if(this.PropertyForm.valid){
+      alertify.confirm('Confirm Listing?', () => {
+      this.propertyService.post(this.PropertyForm.value).subscribe((property:Property) => {
+      alertify.success(`Successfully Listed Property`);
+      this.router.navigate(['main-page']);
+      })
+      }).set({title:"Confirm action"});
+      }
+      }
+
+      public get IsBasicFormValid():boolean{
+      return this.PropertyForm.get('propertyName')?.valid! &&
+      this.PropertyForm.get('propertyTypeID')?.valid! &&
+      this.PropertyForm.get('propertyListingTypeID')?.valid! &&
+      this.PropertyForm.get('bedroomCount')?.valid! &&
+      this.PropertyForm.get('bathroomCount')?.valid! &&
+      this.PropertyForm.get('balcony')?.valid! &&
+      this.PropertyForm.get('buildedYear')?.valid! &&
+      this.PropertyForm.get('heatSystem')?.valid!
+      }
+      public get IsPricingFormValid():boolean{
+      return this.PropertyForm.get('propertyPrice')?.valid! &&
+      this.PropertyForm.get('grossArea')?.valid! &&
+      this.PropertyForm.get('netArea')?.valid! &&
+      this.PropertyForm.get('dues')?.valid!
+      }
 
 
-}
-public onCityChange($event:string){
-this.PropertyForm.controls['city'].setValue($event);
-}
-public onDistrictChange($event:string){
-this.PropertyForm.controls['district'].setValue($event);
-}
-public onQuarterChange($event:string){
-this.PropertyForm.controls['quarter'].setValue($event);
-}
-public onHeatSystemsChange($event:string){
-    this.PropertyForm.controls['heatSystem'].setValue($event);
-}
-public onSubmit(){
-  
-}
-}
+      }
