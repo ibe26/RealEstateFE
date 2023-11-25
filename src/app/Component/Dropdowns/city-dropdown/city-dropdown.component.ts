@@ -17,7 +17,6 @@ export class CityDropdownComponent {
   
   @Input() defaultValue!:string|undefined;
   @Output() cityValueChange = new EventEmitter<string>();
-
   public cities=turkey.getCities();
   public onChange(event:any){
 
@@ -25,5 +24,7 @@ export class CityDropdownComponent {
     //code is city code and name is city name
     this.cityValueChange.emit(event.value.name)
   }
-
+ngOnChanges(){
+  console.log(this.defaultValue)
+}
 }

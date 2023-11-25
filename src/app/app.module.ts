@@ -18,6 +18,7 @@ import { MainPageComponent } from './Component/Property/main-page/main-page.comp
 import { AddPropertyComponent } from './Component/Property/add-property/add-property.component';
 import { HeatSystemsDropdownComponent } from './Component/Dropdowns/heat-systems-dropdown/heat-systems-dropdown.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { EditPropertyComponent } from './Component/Property/edit-property/edit-property.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     YearPluralPipe,
     AddPropertyComponent,
     HeatSystemsDropdownComponent,
+    EditPropertyComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

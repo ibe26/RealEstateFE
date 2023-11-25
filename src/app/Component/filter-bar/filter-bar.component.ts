@@ -61,7 +61,6 @@ export class FilterBarComponent {
   
 
     public Submit():void{
-      console.log(this.FilterForm.value)
       this._propertyService.getFilteredList(this.FilterForm.value).subscribe((data:Array<Property>)=>{
         localStorage.setItem('filteredPropertyList',JSON.stringify(data));
         if(this.router.url==='/filtered-list')

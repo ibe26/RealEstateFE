@@ -1,6 +1,6 @@
 <mat-form-field>
     <mat-label>Property Type</mat-label>
-    <mat-select  (selectionChange)="onChange($event)">
+    <mat-select [value]="defaultValue" (selectionChange)="onChange($event)">
       <mat-option>Clear</mat-option>
       <mat-option  *ngFor="let type of propertyTypes$|async" [value]="type.propertyTypeID">
         {{type.propertyTypeName}}

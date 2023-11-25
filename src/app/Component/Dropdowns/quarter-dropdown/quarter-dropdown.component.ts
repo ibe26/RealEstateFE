@@ -17,7 +17,7 @@ import * as turkey from 'turkey-neighbourhoods';
 export class QuarterDropdownComponent {
 
   
-  @Input() defaultValue!:string;
+  @Input() defaultValue!:string|undefined;
   @Input() cityNameAndDistrict:{city:string,district:string}|undefined;
   @Output() quarterValueChange = new EventEmitter<string>();
 
@@ -25,7 +25,6 @@ export class QuarterDropdownComponent {
   public quarters!:string[];
   ngOnChanges(){
     if(this.cityNameAndDistrict!==undefined){
-      console.log(this.cityNameAndDistrict)
     this.cityCode=turkey.getCities().find(c=>c.name.toString().toLowerCase()==this.cityNameAndDistrict!.city.toString().toLowerCase())!.code;
     this.quarters=turkey.getNeighbourhoodsByCityCodeAndDistrict(this.cityCode,this.cityNameAndDistrict.district);
     }

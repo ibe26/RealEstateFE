@@ -1,0 +1,153 @@
+import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Property, PropertyDTO } from 'src/app/Model/Property';
+import { PropertyListingType } from 'src/app/Model/PropertyListingType';
+import { AddressModule } from 'src/app/Modules/address/address.module';
+import { PropertyTypesModule } from 'src/app/Modules/property-types/property-types.module';
+import { PropertyListingTypeService } from 'src/app/Service/property-listing-type.service';
+import { PropertyService } from 'src/app/Service/property.service';
+import { HeatSystemsDropdownComponent } from '../../Dropdowns/heat-systems-dropdown/heat-systems-dropdown.component';
+import alertify from 'alertifyjs';
+import { Observable } from 'rxjs';
+
+@Component({
+  selector: 'app-edit-property',
+  templateUrl: './edit-property.component.html',
+  styleUrls: ['./edit-property.component.css'],
+  standalone: true,
+  imports: [MatToolbarModule,
+  MatButtonModule,
+  AddressModule,
+  PropertyTypesModule,
+  MatFormFieldModule,
+  MatInputModule,
+  FormsModule,
+  ReactiveFormsModule,
+  CommonModule,
+  MatRadioModule,
+  MatTabsModule,
+  HeatSystemsDropdownComponent,
+  MatSelectModule
+  ]
+})
+export class EditPropertyComponent {
+
+  ngOnInit():void{
+    this.propertyListingTypeService.getList().subscribe((data:Array<PropertyListingType>)=>{
+      this.propertyListingTypes=data;
+      })
+      const year=new Date().getFullYear();
+      for (let index = 0; year-index >= 1900; index++) {
+      this.yearList[index]=year-index;
+      }
+      this.property$.subscribe((property:Property)=>{
+        this.PropertyForm=this.formBuilder.group({
+          propertyName:         [property.propertyName, [Validators.required]],
+          propertyTypeID:       [property.propertyType.propertyTypeID, [Validators.required]],
+          propertyListingTypeID:[property.propertyListingType.propertyListingTypeID, [Validators.required]],
+          propertyPrice:        [property.propertyPrice, [Validators.required]],
+          bedroomCount:         [property.bedroomCount, [Validators.required]],
+          bathroomCount:        [property.bathroomCount, [Validators.required]],
+          grossArea:            [property.grossArea, [Validators.required]],
+          netArea:              [property.netArea, [Validators.required]],
+          city:                 [property.city, [Validators.required]],
+          district:             [property.district, [Validators.required]],
+          quarter:              [property.quarter, [Validators.required]],
+          dues:                 [property.dues, [Validators.required]],
+          balcony:              [property.balcony, [Validators.required]],
+          heatSystem:           [property.heatSystem, [Validators.required]],
+          buildedYear:          [property.buildedYear, [Validators.required]],
+          description:          [property.description],
+          floor:                [property.floor],
+          totalFloor:           [property.totalFloor]
+          })
+      })
+      }
+    
+      private formBuilder=inject(FormBuilder);
+      private propertyListingTypeService=inject(PropertyListingTypeService);
+      private propertyService=inject(PropertyService);
+      private router=inject(Router);
+      private readonly activatedRoute=inject(ActivatedRoute)
+
+        private readonly propertyID:number=this.activatedRoute.snapshot.params['id'];
+        private propertyListingTypes:Array<PropertyListingType>=[];
+        public readonly property$:Observable<Property>=this.propertyService.getById(this.propertyID);
+        public currentPropertyListingType:string="sale";
+        
+        //selectedIndex is used for navigating throughout the tab.
+        public selectedIndex=0;
+        public yearList:Array<number>=[];
+    
+          // public readonly maxAllowedFileSize=10*1024*1024;
+          // private uploader!:FileUploader;
+    
+          // private initializeFileUploader(propertyID:number){
+          // this.uploader=new FileUploader({
+          // url:API.domainUrl+API.uploadImages+propertyID+'/',
+          // isHTML5:true,
+          // allowedFileType:['image'],
+          // removeAfterUpload:true,
+          // autoUpload:true,
+          // maxFileSize: this.maxAllowedFileSize
+          // })
+          // }
+    
+          public PropertyForm!:FormGroup;
+    
+          public onTypeChange($event: number) {
+          this.PropertyForm.controls['propertyTypeID'].setValue($event);
+          }
+          public onListingTypeChange($event: number) {
+          this.PropertyForm.controls['propertyListingTypeID'].setValue($event);
+          this.currentPropertyListingType=this.propertyListingTypes.find(lpt=>lpt.propertyListingTypeID===$event)?.propertyListingTypeName!;
+    
+          }
+          public onCityChange($event:string){
+          this.PropertyForm.controls['city'].setValue($event);
+          }
+          public onDistrictChange($event:string){
+          this.PropertyForm.controls['district'].setValue($event);
+          }
+          public onQuarterChange($event:string){
+          this.PropertyForm.controls['quarter'].setValue($event);
+          }
+          public onHeatSystemsChange($event:string){
+          this.PropertyForm.controls['heatSystem'].setValue($event);
+          }
+          public onSubmit(){
+          if(this.PropertyForm.valid){
+          
+          this.propertyService.update(this.PropertyForm.value,this.propertyID).subscribe(() => {
+          alertify.success(`Successfully Updated Property`);
+          this.router.navigate(['main-page']);
+          })
+          }
+          }
+    
+          public get IsBasicFormValid():boolean{
+          return this.PropertyForm.get('propertyName')?.valid! &&
+          this.PropertyForm.get('propertyTypeID')?.valid! &&
+          this.PropertyForm.get('propertyListingTypeID')?.valid! &&
+          this.PropertyForm.get('bedroomCount')?.valid! &&
+          this.PropertyForm.get('bathroomCount')?.valid! &&
+          this.PropertyForm.get('balcony')?.valid! &&
+          this.PropertyForm.get('buildedYear')?.valid! &&
+          this.PropertyForm.get('heatSystem')?.valid!
+          }
+          public get IsPricingFormValid():boolean{
+          return this.PropertyForm.get('propertyPrice')?.valid! &&
+          this.PropertyForm.get('grossArea')?.valid! &&
+          this.PropertyForm.get('netArea')?.valid! &&
+          this.PropertyForm.get('dues')?.valid!
+          }
+}

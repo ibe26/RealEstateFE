@@ -44,7 +44,7 @@ ngOnInit():void{
 this.propertyListingTypeService.getList().subscribe((data:Array<PropertyListingType>)=>{
   this.propertyListingTypes=data;
   })
-  let year=new Date().getFullYear();
+  const year=new Date().getFullYear();
   for (let index = 0; year-index >= 1900; index++) {
   this.yearList[index]=year-index;
 
@@ -76,24 +76,24 @@ this.propertyListingTypeService.getList().subscribe((data:Array<PropertyListingT
       // }
 
       public PropertyForm:FormGroup=this.formBuilder.group({
-      propertyName:[null, [Validators.required]],
-      propertyTypeID:[null, [Validators.required]],
+      propertyName:         [null, [Validators.required]],
+      propertyTypeID:       [null, [Validators.required]],
       propertyListingTypeID:[null, [Validators.required]],
-      propertyPrice:[null, [Validators.required]],
-      bedroomCount:[null, [Validators.required]],
-      bathroomCount:[null, [Validators.required]],
-      grossArea:[null, [Validators.required]],
-      netArea:[null, [Validators.required]],
-      city:[undefined, [Validators.required]],
-      district:[undefined, [Validators.required]],
-      quarter:[undefined, [Validators.required]],
-      dues:[null, [Validators.required]],
-      balcony:[null, [Validators.required]],
-      heatSystem:[null, [Validators.required]],
-      buildedYear:[null, [Validators.required]],
-      description:[null],
-      floor:[null],
-      totalFloor:[null]
+      propertyPrice:        [null, [Validators.required]],
+      bedroomCount:         [null, [Validators.required]],
+      bathroomCount:        [null, [Validators.required]],
+      grossArea:            [null, [Validators.required]],
+      netArea:              [null, [Validators.required]],
+      dues:                 [null, [Validators.required]],
+      balcony:              [null, [Validators.required]],
+      heatSystem:           [null, [Validators.required]],
+      buildedYear:          [null, [Validators.required]],
+      city:                 [undefined, [Validators.required]],
+      district:             [undefined, [Validators.required]],
+      quarter:              [undefined, [Validators.required]],
+      description:          [null],
+      floor:                [null],
+      totalFloor:           [null]
       })
 
       public onTypeChange($event: number) {
@@ -106,9 +106,12 @@ this.propertyListingTypeService.getList().subscribe((data:Array<PropertyListingT
       }
       public onCityChange($event:string){
       this.PropertyForm.controls['city'].setValue($event);
+      this.PropertyForm.controls['district'].setValue(undefined);
+      this.PropertyForm.controls['quarter'].setValue(undefined);
       }
       public onDistrictChange($event:string){
       this.PropertyForm.controls['district'].setValue($event);
+      this.PropertyForm.controls['quarter'].setValue(undefined);
       }
       public onQuarterChange($event:string){
       this.PropertyForm.controls['quarter'].setValue($event);
