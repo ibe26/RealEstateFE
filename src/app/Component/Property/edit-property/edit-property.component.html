@@ -10,6 +10,10 @@
         <mat-tab label="Address" [disabled]="!IsPricingFormValid">
           <ng-container *ngTemplateOutlet="Address"></ng-container>
         </mat-tab>
+        <mat-tab label="Photo Editor">
+          <ng-container *ngTemplateOutlet="PhotoEditor"></ng-container>
+          
+        </mat-tab>
       </mat-tab-group>
     </form>
   
@@ -160,5 +164,10 @@
   
       </div>
     </div>
+  </ng-template>
+  
+  <ng-template #PhotoEditor>
+    <input type="file" multiple (change)="onImageSelect($event)">
+    <img *ngFor="let url of urls" [src]="url">
   </ng-template>
   

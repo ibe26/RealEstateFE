@@ -18,6 +18,7 @@ import { PropertyService } from 'src/app/Service/property.service';
 import { HeatSystemsDropdownComponent } from '../../Dropdowns/heat-systems-dropdown/heat-systems-dropdown.component';
 import alertify from 'alertifyjs';
 import { Observable } from 'rxjs';
+import { ImageService } from 'src/app/Service/image.service';
 
 @Component({
   selector: 'app-edit-property',
@@ -76,6 +77,7 @@ export class EditPropertyComponent {
       private formBuilder=inject(FormBuilder);
       private propertyListingTypeService=inject(PropertyListingTypeService);
       private propertyService=inject(PropertyService);
+      private imageService=inject(ImageService);
       private router=inject(Router);
       private readonly activatedRoute=inject(ActivatedRoute)
 
@@ -83,6 +85,8 @@ export class EditPropertyComponent {
         private propertyListingTypes:Array<PropertyListingType>=[];
         public readonly property$:Observable<Property>=this.propertyService.getById(this.propertyID);
         public currentPropertyListingType:string="sale";
+        public urls: any[]=[];
+        
         
         //selectedIndex is used for navigating throughout the tab.
         public selectedIndex=0;
@@ -123,6 +127,27 @@ export class EditPropertyComponent {
           }
           public onHeatSystemsChange($event:string){
           this.PropertyForm.controls['heatSystem'].setValue($event);
+          }
+          public onImageSelect($event:any){
+            const files=$event.target.files;
+            let formData=new FormData();
+            for(let i=0;i<files.length;i++){
+              formData.append('uploadFile',files[i],files[i].name)
+            }
+            this.imageService.post(formData,this.propertyID).subscribe(result=>console.log(result));
+            // if(files){
+            //   for (let i = 0; i < files.length; i++) {
+            //     const reader = new FileReader();
+            //     reader.readAsDataURL(files[i]);
+            //     reader.onload=(events:any)=>{
+            //       this.urls.push(events.target.result)
+            //       console.log(events.target)
+            //     }
+            //   }
+            //     for(let i=0;i<this.urls.length;i++){
+            //       console.log(this.urls[i]);
+            //     }
+            // }
           }
           public onSubmit(){
           if(this.PropertyForm.valid){
