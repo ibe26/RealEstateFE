@@ -6,6 +6,6 @@ export class API {
     public static get deleteById() { return "delete/" };
     public static get update() { return "update/" };
     public static get filterList() { return "filterList/" };
-    public static get uploadImages() {return "uploadImages/"};
+    public static get uploadImages() {return "uploadImages"};
     public static get getImages () {return "getImages/"};
 }

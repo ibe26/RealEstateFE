@@ -10,6 +10,6 @@ import { PropertyService } from 'src/app/Service/property.service';
   styleUrls: ['./property-list.component.css']
 })
 export class PropertyListComponent{
-@Input() propertyList$!:Observable<Array<Property>>;
+@Input() propertyList$:Observable<Array<Property>> | undefined;
   
 }

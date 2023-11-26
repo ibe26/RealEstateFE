@@ -11,7 +11,7 @@ export class ImageService {
   public get(propertyID:number):Observable<Array<string>>{
     return this.httpClient.get<Array<string>>(this.domain+API.getImages+propertyID);
   }
-  public post(images:FormData,propertyID:number):Observable<any>{
+  public post(images:any,propertyID:number):Observable<any>{
     return this.httpClient.post<any>(this.domain+API.uploadImages+`?propertyID=${propertyID}`,images);
   }
 

@@ -129,12 +129,14 @@ export class EditPropertyComponent {
           this.PropertyForm.controls['heatSystem'].setValue($event);
           }
           public onImageSelect($event:any){
+            
             const files=$event.target.files;
             let formData=new FormData();
             for(let i=0;i<files.length;i++){
-              formData.append('uploadFile',files[i],files[i].name)
+              formData.append('formFile',files[i],files[i].name)
+              console.log(formData)
             }
-            this.imageService.post(formData,this.propertyID).subscribe(result=>console.log(result));
+            this.imageService.post(formData,this.propertyID).subscribe();
             // if(files){
             //   for (let i = 0; i < files.length; i++) {
             //     const reader = new FileReader();
