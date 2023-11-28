@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, JsonPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,6 +19,7 @@ import { HeatSystemsDropdownComponent } from '../../Dropdowns/heat-systems-dropd
 import alertify from 'alertifyjs';
 import { Observable } from 'rxjs';
 import { ImageService } from 'src/app/Service/image.service';
+import { Photo } from 'src/app/Model/Photo';
 
 @Component({
   selector: 'app-edit-property',
@@ -40,9 +41,12 @@ import { ImageService } from 'src/app/Service/image.service';
   MatSelectModule
   ]
 })
+
 export class EditPropertyComponent {
 
+  
   ngOnInit():void{
+    this.imageService.get(this.propertyID).subscribe(result=>this.imageService.photos=result)
     this.propertyListingTypeService.getList().subscribe((data:Array<PropertyListingType>)=>{
       this.propertyListingTypes=data;
       })
@@ -77,7 +81,7 @@ export class EditPropertyComponent {
       private formBuilder=inject(FormBuilder);
       private propertyListingTypeService=inject(PropertyListingTypeService);
       private propertyService=inject(PropertyService);
-      private imageService=inject(ImageService);
+      public imageService=inject(ImageService);
       private router=inject(Router);
       private readonly activatedRoute=inject(ActivatedRoute)
 
@@ -85,26 +89,11 @@ export class EditPropertyComponent {
         private propertyListingTypes:Array<PropertyListingType>=[];
         public readonly property$:Observable<Property>=this.propertyService.getById(this.propertyID);
         public currentPropertyListingType:string="sale";
-        public urls: any[]=[];
         
         
         //selectedIndex is used for navigating throughout the tab.
         public selectedIndex=0;
         public yearList:Array<number>=[];
-    
-          // public readonly maxAllowedFileSize=10*1024*1024;
-          // private uploader!:FileUploader;
-    
-          // private initializeFileUploader(propertyID:number){
-          // this.uploader=new FileUploader({
-          // url:API.domainUrl+API.uploadImages+propertyID+'/',
-          // isHTML5:true,
-          // allowedFileType:['image'],
-          // removeAfterUpload:true,
-          // autoUpload:true,
-          // maxFileSize: this.maxAllowedFileSize
-          // })
-          // }
     
           public PropertyForm!:FormGroup;
     
@@ -129,36 +118,33 @@ export class EditPropertyComponent {
           this.PropertyForm.controls['heatSystem'].setValue($event);
           }
           public onImageSelect($event:any){
-            
             const files=$event.target.files;
             let formData=new FormData();
             for(let i=0;i<files.length;i++){
-              formData.append('formFile',files[i],files[i].name)
-              console.log(formData)
+              if(!this.imageService.photos.find(p=>p.name==files[i].name))
+              {
+                const reader = new FileReader();
+                  reader.readAsDataURL(files[i]);
+                  reader.onload=(events:any)=>{
+                    this.imageService.photos.push({
+                      url:events.target.result,
+                      name:files[i].name
+                    })
+                  }
+                formData.append('formFile',files[i],files[i].name)
+                this.imageService.post(formData,this.propertyID).subscribe();
+              }
             }
-            this.imageService.post(formData,this.propertyID).subscribe();
-            // if(files){
-            //   for (let i = 0; i < files.length; i++) {
-            //     const reader = new FileReader();
-            //     reader.readAsDataURL(files[i]);
-            //     reader.onload=(events:any)=>{
-            //       this.urls.push(events.target.result)
-            //       console.log(events.target)
-            //     }
-            //   }
-            //     for(let i=0;i<this.urls.length;i++){
-            //       console.log(this.urls[i]);
-            //     }
-            // }
+            
           }
           public onSubmit(){
-          if(this.PropertyForm.valid){
-          
-          this.propertyService.update(this.PropertyForm.value,this.propertyID).subscribe(() => {
-          alertify.success(`Successfully Updated Property`);
-          this.router.navigate(['main-page']);
-          })
-          }
+            if(this.PropertyForm.valid){
+            
+            this.propertyService.update(this.PropertyForm.value,this.propertyID).subscribe(() => {
+            alertify.success(`Successfully Updated Property`);
+            this.router.navigate(['main-page']);
+            })
+            }
           }
     
           public get IsBasicFormValid():boolean{
@@ -178,3 +164,4 @@ export class EditPropertyComponent {
           this.PropertyForm.get('dues')?.valid!
           }
 }
+

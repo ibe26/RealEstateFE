@@ -1,4 +1,4 @@
-<div class="container ml-5" >
+<div *ngIf="PropertyForm!=null" class="container ml-5" >
     <form [formGroup]="PropertyForm" (ngSubmit)="onSubmit()">
       <mat-tab-group [(selectedIndex)]="selectedIndex" style="height: 600px;">
         <mat-tab label="Basic Info">
@@ -167,7 +167,14 @@
   </ng-template>
   
   <ng-template #PhotoEditor>
+    <div >
+      <div class="row">
+        <div class="col-2 mr-5" *ngFor="let photo of this.imageService.photos">
+          <img *ngIf="photo" style="height: 200px; width: 200px;" [src]="photo.url">
+          <label>{{photo.name}}</label>
+        </div>
+      </div>
+    </div>
     <input type="file" multiple (change)="onImageSelect($event)">
-    <img *ngFor="let url of urls" [src]="url">
   </ng-template>
   

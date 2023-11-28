@@ -93,8 +93,8 @@
     <ngb-carousel *ngIf="images$|async" [showNavigationArrows]="true" [showNavigationIndicators]="true"
       [animation]="false">
       <ng-template ngbSlide *ngFor="let image of images$|async">
-        <div class="picsum-img-wrapper">
-          <img [src]="image" style="height: 300px; width: 700px;" />
+        <div *ngIf="image.url" class="picsum-img-wrapper">
+          <img [src]="image.url" style="height: 300px; width: 700px;" />
         </div>
       </ng-template>
     </ngb-carousel>

@@ -14,17 +14,16 @@ import * as turkey from 'turkey-neighbourhoods';
 
 })
 export class CityDropdownComponent {
-  
+  ngOnInit(){
+
+  }
   @Input() defaultValue!:string|undefined;
   @Output() cityValueChange = new EventEmitter<string>();
   public cities=turkey.getCities();
   public onChange(event:any){
-
     //event.value:{code:any,name:string}
     //code is city code and name is city name
-    this.cityValueChange.emit(event.value.name)
+    console.log(event.value)
+    this.cityValueChange.emit(event.value)
   }
-ngOnChanges(){
-  console.log(this.defaultValue)
-}
 }

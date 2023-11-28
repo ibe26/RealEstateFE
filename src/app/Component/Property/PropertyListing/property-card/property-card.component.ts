@@ -5,6 +5,7 @@ import { ImageService } from 'src/app/Service/image.service';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { Photo } from 'src/app/Model/Photo';
 
 @Component({
   selector: 'app-property-card',
@@ -16,11 +17,10 @@ import { RouterModule } from '@angular/router';
 export class PropertyCardComponent implements OnInit {
   @Input() property!:Property;
 ngOnInit():void{
-  this.images$=this._imageService.get(1);
-  
+  this.images$=this._imageService.get(this.property.propertyID);
 }
   private _imageService=inject(ImageService);
-  public images$!:Observable<Array<string>>;
+  public images$!:Observable<Array<Photo>>
   public isHovered=false;
 
 }
