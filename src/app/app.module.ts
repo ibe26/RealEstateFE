@@ -19,14 +19,12 @@ import { AddPropertyComponent } from './Component/Property/add-property/add-prop
 import { HeatSystemsDropdownComponent } from './Component/Dropdowns/heat-systems-dropdown/heat-systems-dropdown.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { EditPropertyComponent } from './Component/Property/edit-property/edit-property.component';
+import { RegisterComponent } from './Component/register/register.component';
+import { LoginComponent } from './Component/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PropertyListComponent,
-    LoadingScreenComponent,
-    FilteredListComponent,
-    MainPageComponent,
   ],
   imports: [
     NgbModule,
@@ -43,6 +41,12 @@ import { EditPropertyComponent } from './Component/Property/edit-property/edit-p
     AddPropertyComponent,
     HeatSystemsDropdownComponent,
     EditPropertyComponent,
+    FilteredListComponent,
+    PropertyListComponent,
+    LoadingScreenComponent,
+    RegisterComponent,
+    MainPageComponent,
+    LoginComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

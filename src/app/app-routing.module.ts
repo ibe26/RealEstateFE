@@ -5,6 +5,8 @@ import { MainPageComponent } from './Component/Property/main-page/main-page.comp
 import { FilteredListComponent } from './Component/Property/PropertyListing/filtered-list/filtered-list.component';
 import { AddPropertyComponent } from './Component/Property/add-property/add-property.component';
 import { EditPropertyComponent } from './Component/Property/edit-property/edit-property.component';
+import { RegisterComponent } from './Component/register/register.component';
+import { LoginComponent } from './Component/login/login.component';
 
 const routes: Routes = [
   {path:'main-page',component:MainPageComponent},
@@ -12,8 +14,9 @@ const routes: Routes = [
   {path:'view-property/:id',component:PropertyViewComponent},
   {path:'filtered-list',component:FilteredListComponent},
   {path:'add-property',component:AddPropertyComponent},
-  {path:'edit-property/:id',component:EditPropertyComponent}
-  
+  {path:'edit-property/:id',component:EditPropertyComponent},
+  {path:'register',component:RegisterComponent},
+  {path:'login',component:LoginComponent}
 ];
 
 @NgModule({

@@ -1,0 +1,25 @@
+<form style="float: right; margin-right: 45%;" [formGroup]="UserForm" (ngSubmit)="onSubmit()">
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>email</mat-label>
+        <input type="text" class="inputHeight" matInput formControlName="email" />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input
+          type="password"
+          class="inputHeight"
+          matInput
+          formControlName="password"
+        />
+      </mat-form-field>
+    </div>
+  
+    <div>
+      <button class="mt-1" type="submit" mat-raised-button color="primary">
+        Login
+      </button>
+    </div>
+  </form>
