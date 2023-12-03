@@ -19,7 +19,7 @@ import { HeatSystemsDropdownComponent } from '../../Dropdowns/heat-systems-dropd
 import alertify from 'alertifyjs';
 import { Observable } from 'rxjs';
 import { ImageService } from 'src/app/Service/image.service';
-import { Photo } from 'src/app/Model/Photo';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'app-edit-property',
@@ -38,7 +38,8 @@ import { Photo } from 'src/app/Model/Photo';
   MatRadioModule,
   MatTabsModule,
   HeatSystemsDropdownComponent,
-  MatSelectModule
+  MatSelectModule,
+  MatIconModule
   ]
 })
 
@@ -145,6 +146,11 @@ export class EditPropertyComponent {
             this.router.navigate(['main-page']);
             })
             }
+          }
+          public onImageDelete(imageName:string){
+            this.imageService.delete(imageName,this.propertyID).subscribe(()=>{
+              this.imageService.photos=this.imageService.photos.filter(p=>p.name!==imageName);
+            })
           }
     
           public get IsBasicFormValid():boolean{
