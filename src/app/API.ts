@@ -8,6 +8,7 @@ public static get update() { return "update/" };
 public static get filterList() { return "filterList/"};
 public static get login() {return "login"};
 public static get register(){return "register"};
+public static get validateToken(){return "validateToken"};
 }
 
 export class LocalStorageHelper{

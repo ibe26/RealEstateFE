@@ -31,7 +31,7 @@ export class LoginComponent {
     if (this.UserForm.valid) {
       this.userService.login(this.UserForm.value).subscribe(data => {
         localStorage.setItem(LocalStorageHelper.tokenKey, data.token);
-        this.router.navigate(['main-page']);
+        location.href='main-page';
       })
     }
     else alertify.error("Please provide needed informations.");

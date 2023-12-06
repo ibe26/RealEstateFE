@@ -1,5 +1,29 @@
-<mat-toolbar>
-    <span class="clickable" routerLink="/main-page" style="margin-left: 10%;">Real Estate</span>
-    
-  </mat-toolbar>
+<mat-toolbar class="row">
+    <div class="col-2">
+      <span  style="float: right;" class="clickable" routerLink="/main-page"
+        >Real Estate</span>
+    </div>
+    <div class="col-9">
+      <ng-container
+        *ngTemplateOutlet="LoggedIn() ? LoggedInItems : LoggingItems"
+      ></ng-container>
+    </div>
+</mat-toolbar>
+
+<ng-template #LoggingItems>
+  <div style="float: right;">
+    <span routerLink="login">Login </span>
+  <i>|</i>
+  <span routerLink="register"> Register</span>
+  </div>
   
+</ng-template>
+
+<ng-template #LoggedInItems>
+  <div *ngIf="User" style="float: right;">
+   <span>{{ User.firstName + " " + User.lastName }}</span> 
+  <i> | </i>
+
+    <span (click)="Logout()">Logout</span>
+  </div>
+</ng-template>
