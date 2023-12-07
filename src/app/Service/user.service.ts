@@ -13,8 +13,8 @@ export class UserService {
     public getList():Observable<Array<User>>{
       return this.httpClient.get<Array<User>>(this.domain+API.getList)
     }
-    public getById(id:number):Observable<User>{
-      return this.httpClient.get<User>(`${this.domain+API.getById+id}`)
+    public getById(id:number):Observable<UserDTO>{
+      return this.httpClient.get<UserDTO>(`${this.domain+API.getById+id}`)
     }
     public register(registerDTO:RegisterDTO):Observable<User>{
       return this.httpClient.post<User>(this.domain+API.register,registerDTO)

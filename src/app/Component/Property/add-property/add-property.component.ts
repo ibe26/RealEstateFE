@@ -17,121 +17,134 @@ import { PropertyTypesModule } from 'src/app/Modules/property-types/property-typ
 import alertify from 'alertifyjs';
 import { PropertyService } from 'src/app/Service/property.service';
 import { Property } from 'src/app/Model/Property';
+import { LocalStorageHelper } from 'src/app/API';
+import { UserService } from 'src/app/Service/user.service';
 
 @Component({
-selector: 'app-add-property',
-templateUrl: './add-property.component.html',
-styleUrls: ['./add-property.component.css'],
-standalone: true,
-imports: [MatToolbarModule,
-MatButtonModule,
-AddressModule,
-PropertyTypesModule,
-MatFormFieldModule,
-MatInputModule,
-FormsModule,
-ReactiveFormsModule,
-CommonModule,
-MatRadioModule,
-MatTabsModule,
-HeatSystemsDropdownComponent,
-MatSelectModule
-]
+  selector: 'app-add-property',
+  templateUrl: './add-property.component.html',
+  styleUrls: ['./add-property.component.css'],
+  standalone: true,
+  imports: [MatToolbarModule,
+    MatButtonModule,
+    AddressModule,
+    PropertyTypesModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
+    MatRadioModule,
+    MatTabsModule,
+    HeatSystemsDropdownComponent,
+    MatSelectModule
+  ]
 })
 export class AddPropertyComponent {
 
-ngOnInit():void{
-this.propertyListingTypeService.getList().subscribe((data:Array<PropertyListingType>)=>{
-  this.propertyListingTypes=data;
+  ngOnInit(): void {
+    this.propertyListingTypeService.getList().subscribe((data: Array<PropertyListingType>) => {
+      this.propertyListingTypes = data;
+    })
+    const year = new Date().getFullYear();
+    for (let index = 0; year - index >= 1900; index++) {
+      this.yearList[index] = year - index;
+    }
+    this.userService.validateToken().subscribe(userID=>{
+      if(userID){
+        this.PropertyForm.controls['userID'].setValue(userID);
+      }
+    })
+  }
+
+  private formBuilder = inject(FormBuilder);
+  private propertyListingTypeService = inject(PropertyListingTypeService);
+  private propertyService = inject(PropertyService);
+  private userService=inject(UserService);
+  private router = inject(Router);
+
+  private propertyListingTypes: Array<PropertyListingType> = [];
+  public currentPropertyListingType: string = "sale";
+  public selectedIndex = 0;
+  public yearList: Array<number> = [];
+
+  // public readonly maxAllowedFileSize=10*1024*1024;
+  // private uploader!:FileUploader;
+
+  // private initializeFileUploader(propertyID:number){
+  // this.uploader=new FileUploader({
+  // url:API.domainUrl+API.uploadImages+propertyID+'/',
+  // isHTML5:true,
+  // allowedFileType:['image'],
+  // removeAfterUpload:true,
+  // autoUpload:true,
+  // maxFileSize: this.maxAllowedFileSize
+  // })
+  // }
+
+  public PropertyForm: FormGroup = this.formBuilder.group({
+    propertyName: [null, [Validators.required]],
+    propertyTypeID: [null, [Validators.required]],
+    propertyListingTypeID: [null, [Validators.required]],
+    propertyPrice: [null, [Validators.required]],
+    bedroomCount: [null, [Validators.required]],
+    bathroomCount: [null, [Validators.required]],
+    grossArea: [null, [Validators.required]],
+    netArea: [null, [Validators.required]],
+    dues: [null, [Validators.required]],
+    balcony: [null, [Validators.required]],
+    heatSystem: [null, [Validators.required]],
+    buildedYear: [null, [Validators.required]],
+    city: [undefined, [Validators.required]],
+    district: [undefined, [Validators.required]],
+    quarter: [undefined, [Validators.required]],
+    userID:[null,[Validators.required]],
+    description: [null],
+    floor: [null],
+    totalFloor: [null]
   })
-  const year=new Date().getFullYear();
-  for (let index = 0; year-index >= 1900; index++) {
-  this.yearList[index]=year-index;
+
+  public onTypeChange($event: number) {
+    this.PropertyForm.controls['propertyTypeID'].setValue($event);
+  }
+  public onListingTypeChange($event: number) {
+    this.PropertyForm.controls['propertyListingTypeID'].setValue($event);
+    this.currentPropertyListingType = this.propertyListingTypes.find(lpt => lpt.propertyListingTypeID === $event)?.propertyListingTypeName!;
 
   }
+  public onCityChange($event: string) {
+    this.PropertyForm.controls['city'].setValue($event);
+    this.PropertyForm.controls['district'].setValue(undefined);
+    this.PropertyForm.controls['quarter'].setValue(undefined);
   }
-
-  private formBuilder=inject(FormBuilder);
-  private propertyListingTypeService=inject(PropertyListingTypeService);
-  private propertyService=inject(PropertyService);
-  private router=inject(Router);
-
-  private propertyListingTypes:Array<PropertyListingType>=[];
-    public currentPropertyListingType:string="sale";
-    public selectedIndex=0;
-    public yearList:Array<number>=[];
-
-      // public readonly maxAllowedFileSize=10*1024*1024;
-      // private uploader!:FileUploader;
-
-      // private initializeFileUploader(propertyID:number){
-      // this.uploader=new FileUploader({
-      // url:API.domainUrl+API.uploadImages+propertyID+'/',
-      // isHTML5:true,
-      // allowedFileType:['image'],
-      // removeAfterUpload:true,
-      // autoUpload:true,
-      // maxFileSize: this.maxAllowedFileSize
-      // })
-      // }
-
-      public PropertyForm:FormGroup=this.formBuilder.group({
-      propertyName:         [null, [Validators.required]],
-      propertyTypeID:       [null, [Validators.required]],
-      propertyListingTypeID:[null, [Validators.required]],
-      propertyPrice:        [null, [Validators.required]],
-      bedroomCount:         [null, [Validators.required]],
-      bathroomCount:        [null, [Validators.required]],
-      grossArea:            [null, [Validators.required]],
-      netArea:              [null, [Validators.required]],
-      dues:                 [null, [Validators.required]],
-      balcony:              [null, [Validators.required]],
-      heatSystem:           [null, [Validators.required]],
-      buildedYear:          [null, [Validators.required]],
-      city:                 [undefined, [Validators.required]],
-      district:             [undefined, [Validators.required]],
-      quarter:              [undefined, [Validators.required]],
-      description:          [null],
-      floor:                [null],
-      totalFloor:           [null]
-      })
-
-      public onTypeChange($event: number) {
-      this.PropertyForm.controls['propertyTypeID'].setValue($event);
-      }
-      public onListingTypeChange($event: number) {
-      this.PropertyForm.controls['propertyListingTypeID'].setValue($event);
-      this.currentPropertyListingType=this.propertyListingTypes.find(lpt=>lpt.propertyListingTypeID===$event)?.propertyListingTypeName!;
-
-      }
-      public onCityChange($event:string){
-      this.PropertyForm.controls['city'].setValue($event);
-      this.PropertyForm.controls['district'].setValue(undefined);
-      this.PropertyForm.controls['quarter'].setValue(undefined);
-      }
-      public onDistrictChange($event:string){
-      this.PropertyForm.controls['district'].setValue($event);
-      this.PropertyForm.controls['quarter'].setValue(undefined);
-      }
-      public onQuarterChange($event:string){
-      this.PropertyForm.controls['quarter'].setValue($event);
-      }
-      public onHeatSystemsChange($event:string){
-      this.PropertyForm.controls['heatSystem'].setValue($event);
-      }
-      public onSubmit(){
-      if(this.PropertyForm.valid){
+  public onDistrictChange($event: string) {
+    this.PropertyForm.controls['district'].setValue($event);
+    this.PropertyForm.controls['quarter'].setValue(undefined);
+  }
+  public onQuarterChange($event: string) {
+    this.PropertyForm.controls['quarter'].setValue($event);
+  }
+  public onHeatSystemsChange($event: string) {
+    this.PropertyForm.controls['heatSystem'].setValue($event);
+  }
+  public onSubmit() {
+    const token=localStorage.getItem(LocalStorageHelper.tokenKey);
+    if(token!=null)
+    {
+      
+    }
+    if (this.PropertyForm.valid) {
       alertify.confirm('Confirm Listing?', () => {
-      this.propertyService.post(this.PropertyForm.value).subscribe((property:Property) => {
-      alertify.success(`Successfully Listed Property`);
-      this.router.navigate(['main-page']);
-      })
-      }).set({title:"Confirm action"});
-      }
-      }
+        this.propertyService.post(this.PropertyForm.value).subscribe((property: Property) => {
+          alertify.success(`Successfully Listed Property`);
+          this.router.navigate(['main-page']);
+        })
+      }).set({ title: "Confirm action" });
+    }
+  }
 
-      public get IsBasicFormValid():boolean{
-      return this.PropertyForm.get('propertyName')?.valid! &&
+  public get IsBasicFormValid(): boolean {
+    return this.PropertyForm.get('propertyName')?.valid! &&
       this.PropertyForm.get('propertyTypeID')?.valid! &&
       this.PropertyForm.get('propertyListingTypeID')?.valid! &&
       this.PropertyForm.get('bedroomCount')?.valid! &&
@@ -139,13 +152,13 @@ this.propertyListingTypeService.getList().subscribe((data:Array<PropertyListingT
       this.PropertyForm.get('balcony')?.valid! &&
       this.PropertyForm.get('buildedYear')?.valid! &&
       this.PropertyForm.get('heatSystem')?.valid!
-      }
-      public get IsPricingFormValid():boolean{
-      return this.PropertyForm.get('propertyPrice')?.valid! &&
+  }
+  public get IsPricingFormValid(): boolean {
+    return this.PropertyForm.get('propertyPrice')?.valid! &&
       this.PropertyForm.get('grossArea')?.valid! &&
       this.PropertyForm.get('netArea')?.valid! &&
       this.PropertyForm.get('dues')?.valid!
-      }
+  }
 
 
-      }
+}

@@ -18,7 +18,6 @@ import { CommonModule } from '@angular/common';
 export class NavbarComponent implements OnInit {
  public ngOnInit(): void {
     if(localStorage.getItem(LocalStorageHelper.tokenKey)){
-      console.log(localStorage.getItem(LocalStorageHelper.tokenKey)!)
       this.userService.validateToken().subscribe((userID:number)=>{
         this.userService.getById(userID).subscribe(user=>{
           this.User=user;

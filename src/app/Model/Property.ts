@@ -3,6 +3,7 @@ import { PropertyType } from "./PropertyType"
 
 export interface Property extends PropertyDTO{
     propertyID:number,
+    userID:number,
     propertyName:string,
     city:string,
     district:string,
@@ -26,6 +27,7 @@ export interface Property extends PropertyDTO{
 
 export interface PropertyDTO{
     propertyName:string,
+    userID:number,
     city:string,
     district:string,
     quarter:string,

@@ -7,6 +7,7 @@ import { AddPropertyComponent } from './Component/Property/add-property/add-prop
 import { EditPropertyComponent } from './Component/Property/edit-property/edit-property.component';
 import { RegisterComponent } from './Component/register/register.component';
 import { LoginComponent } from './Component/login/login.component';
+import { ProfileComponent } from './Component/profile/profile.component';
 
 const routes: Routes = [
   {path:'main-page',component:MainPageComponent},
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path:'add-property',component:AddPropertyComponent},
   {path:'edit-property/:id',component:EditPropertyComponent},
   {path:'register',component:RegisterComponent},
-  {path:'login',component:LoginComponent}
+  {path:'login',component:LoginComponent},
+  {path:'profile/:id',component:ProfileComponent}
 ];
 
 @NgModule({

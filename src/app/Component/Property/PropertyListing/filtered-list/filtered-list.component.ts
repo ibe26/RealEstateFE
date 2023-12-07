@@ -1,7 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Observable, of } from 'rxjs';
 import { Property } from 'src/app/Model/Property';
-import { PropertyService } from 'src/app/Service/property.service';
 import { PropertyListComponent } from '../property-list/property-list.component';
 
 @Component({
@@ -13,5 +11,5 @@ import { PropertyListComponent } from '../property-list/property-list.component'
 })
 export class FilteredListComponent {
 
-  public readonly filteredPropertyList$:Observable<Array<Property>>=of(JSON.parse(localStorage.getItem('filteredPropertyList')!));
+  public readonly filteredPropertyList:Array<Property>=JSON.parse(localStorage.getItem('filteredPropertyList')!);
 }

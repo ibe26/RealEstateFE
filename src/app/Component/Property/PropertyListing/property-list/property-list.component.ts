@@ -14,6 +14,6 @@ import { CommonModule } from '@angular/common';
   imports:[MatPaginatorModule,PropertyCardComponent,LoadingScreenComponent,CommonModule]
 })
 export class PropertyListComponent{
-@Input() propertyList$:Observable<Array<Property>> | undefined;
+@Input() propertyList:Array<Property> | undefined;
   
 }

@@ -21,6 +21,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { EditPropertyComponent } from './Component/Property/edit-property/edit-property.component';
 import { RegisterComponent } from './Component/register/register.component';
 import { LoginComponent } from './Component/login/login.component';
+import { ProfileComponent } from './Component/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { LoginComponent } from './Component/login/login.component';
     RegisterComponent,
     MainPageComponent,
     LoginComponent,
+    ProfileComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

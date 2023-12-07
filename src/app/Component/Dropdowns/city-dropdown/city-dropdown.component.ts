@@ -23,7 +23,6 @@ export class CityDropdownComponent {
   public onChange(event:any){
     //event.value:{code:any,name:string}
     //code is city code and name is city name
-    console.log(event.value)
     this.cityValueChange.emit(event.value)
   }
 }

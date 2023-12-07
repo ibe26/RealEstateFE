@@ -5,6 +5,7 @@ export interface UserDTO {
     email:string,
     firstName:string,
     lastName:string,
+    properties:Array<Property>,
     token:string
   }
   
@@ -13,7 +14,7 @@ export interface UserDTO {
     email:string,
     firstName:string,
     lastName:string,
-    posts:Array<Property>
+    properties:Array<Property>
   }
   
   
