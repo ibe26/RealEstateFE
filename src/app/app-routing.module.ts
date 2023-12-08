@@ -8,6 +8,8 @@ import { EditPropertyComponent } from './Component/Property/edit-property/edit-p
 import { RegisterComponent } from './Component/register/register.component';
 import { LoginComponent } from './Component/login/login.component';
 import { ProfileComponent } from './Component/profile/profile.component';
+import { AuthGuardTokenService } from './Service/auth.service';
+import { UnauthorizedPageComponent } from './Component/unauthorized-page/unauthorized-page.component';
 
 const routes: Routes = [
   {path:'main-page',component:MainPageComponent},
@@ -15,10 +17,11 @@ const routes: Routes = [
   {path:'view-property/:id',component:PropertyViewComponent},
   {path:'filtered-list',component:FilteredListComponent},
   {path:'add-property',component:AddPropertyComponent},
-  {path:'edit-property/:id',component:EditPropertyComponent},
+  {path:'edit-property/:id',component:EditPropertyComponent,canActivate:[AuthGuardTokenService]},
   {path:'register',component:RegisterComponent},
   {path:'login',component:LoginComponent},
-  {path:'profile/:id',component:ProfileComponent}
+  {path:'profile/:id',component:ProfileComponent},
+  {path:'unauthorized',component:UnauthorizedPageComponent}
 ];
 
 @NgModule({

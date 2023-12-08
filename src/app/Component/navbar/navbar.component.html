@@ -21,7 +21,7 @@
 
 <ng-template #LoggedInItems>
   <div *ngIf="User" style="float: right;">
-   <span>{{ User.firstName + " " + User.lastName }}</span> 
+   <span [routerLink]="'profile/'+User.userID">{{ User.firstName + " " + User.lastName }}</span> 
   <i> | </i>
 
     <span (click)="Logout()">Logout</span>

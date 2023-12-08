@@ -128,16 +128,12 @@ export class AddPropertyComponent {
     this.PropertyForm.controls['heatSystem'].setValue($event);
   }
   public onSubmit() {
-    const token=localStorage.getItem(LocalStorageHelper.tokenKey);
-    if(token!=null)
-    {
-      
-    }
+ 
     if (this.PropertyForm.valid) {
-      alertify.confirm('Confirm Listing?', () => {
+      alertify.confirm('Confirm Listing? (Adding images will be done after listing in the following page.)', () => {
         this.propertyService.post(this.PropertyForm.value).subscribe((property: Property) => {
           alertify.success(`Successfully Listed Property`);
-          this.router.navigate(['main-page']);
+          this.router.navigate([`edit-property/${property.propertyID}`]);
         })
       }).set({ title: "Confirm action" });
     }

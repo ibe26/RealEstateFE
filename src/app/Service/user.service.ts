@@ -8,8 +8,9 @@ import { Observable } from 'rxjs';
 export class UserService {
     private httpClient=inject(HttpClient)
   private readonly domain=API.domainUrl+"User/";
-  public readonly token=localStorage.getItem("token");
+  public readonly token=localStorage.getItem(LocalStorageHelper.tokenKey);
   private httpParams=new HttpParams();
+
     public getList():Observable<Array<User>>{
       return this.httpClient.get<Array<User>>(this.domain+API.getList)
     }

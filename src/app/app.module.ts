@@ -22,10 +22,12 @@ import { EditPropertyComponent } from './Component/Property/edit-property/edit-p
 import { RegisterComponent } from './Component/register/register.component';
 import { LoginComponent } from './Component/login/login.component';
 import { ProfileComponent } from './Component/profile/profile.component';
+import { UnauthorizedPageComponent } from './Component/unauthorized-page/unauthorized-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    UnauthorizedPageComponent
   ],
   imports: [
     NgbModule,

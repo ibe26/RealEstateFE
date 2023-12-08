@@ -74,7 +74,8 @@ export class EditPropertyComponent {
           buildedYear:          [property.buildedYear, [Validators.required]],
           description:          [property.description],
           floor:                [property.floor],
-          totalFloor:           [property.totalFloor]
+          totalFloor:           [property.totalFloor],
+          userID:               [property.userID]
           })
       })
       }
