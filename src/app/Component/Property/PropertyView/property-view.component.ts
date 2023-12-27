@@ -5,7 +5,7 @@ import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { ImageService } from 'src/app/Service/image.service';
 import { PropertyService } from 'src/app/Service/property.service';
 import {MatTabsModule} from '@angular/material/tabs';
-import { YearPluralPipe } from 'src/app/Pipes/year-plural.pipe';
+import { YearPluralPipe } from 'src/app/Pipe/year-plural.pipe';
 
 @Component({
   selector: 'app-property-view',

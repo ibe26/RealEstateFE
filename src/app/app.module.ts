@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -12,7 +11,7 @@ import { FilterBarComponent } from './Component/filter-bar/filter-bar.component'
 import { PropertyViewComponent } from './Component/Property/PropertyView/property-view.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoadingScreenComponent } from './Component/loading-screen/loading-screen.component';
-import { YearPluralPipe } from './Pipes/year-plural.pipe';
+import { YearPluralPipe } from './Pipe/year-plural.pipe';
 import { FilteredListComponent } from './Component/Property/PropertyListing/filtered-list/filtered-list.component';
 import { MainPageComponent } from './Component/Property/main-page/main-page.component';
 import { AddPropertyComponent } from './Component/Property/add-property/add-property.component';
