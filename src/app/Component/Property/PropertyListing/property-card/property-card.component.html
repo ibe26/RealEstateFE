@@ -35,9 +35,13 @@
             </div>
             <div class="col-2 mt-2">
                 <div class="row">
-                    <span style="font-size: 24pt;">
+                    <span *ngIf="property.propertyListingType.propertyListingTypeName.toLowerCase()==='sale'" style="font-size: 24pt;">
                         Price
                     </span>
+                   <span *ngIf="property.propertyListingType.propertyListingTypeName.toLowerCase()==='rent'" style="font-size: 24pt;">
+                        Rent Price
+                    </span>
+
                 </div>
                 <div class="row">
                     <span style="font-size: 17pt;">

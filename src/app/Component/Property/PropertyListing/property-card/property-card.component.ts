@@ -47,6 +47,7 @@ export class PropertyCardComponent implements OnInit {
     alertify.confirm('Confirm Deletion?', () => {
       this._propertyService.delete(this.property.propertyID).subscribe(() => {
         alertify.success(`Successfully Deleted Property Listing`);
+        window.location.reload()
       })
     }).set({ title: "Confirm action" });
   }

@@ -59,8 +59,8 @@
       <div class="row">
         <h2>Balcony*</h2>
         <mat-radio-group class="mb-3" required formControlName="balcony">
-          <mat-radio-button [value]=false>No</mat-radio-button>
-          <mat-radio-button [value]=true>Yes</mat-radio-button>
+          <mat-radio-button type="button" [value]=false>No</mat-radio-button>
+          <mat-radio-button type="button" [value]=true>Yes</mat-radio-button>
         </mat-radio-group>
       </div>
       <div class="row">
@@ -94,7 +94,7 @@
         <mat-form-field style="width: 75%; height: 200%;">
           <textarea matInput cdkTextareaAutosize placeholder="Description..." formControlName="description"></textarea>
         </mat-form-field>
-        <button mat-button [disabled]="!IsBasicFormValid" (click)="selectedIndex=selectedIndex+1"
+        <button mat-button [disabled]="!IsBasicFormValid" type="button" (click)="selectedIndex=selectedIndex+1"
           style="width: 20%;">Next</button>
       </div>
   
@@ -131,8 +131,8 @@
       <div class="row">
         <section class="mb-2">
           <div class="example-button-row">
-            <button mat-raised-button (click)="selectedIndex=selectedIndex-1">Back</button>
-            <button mat-raised-button [disabled]="!IsPricingFormValid" (click)="selectedIndex=selectedIndex+1">Next</button>
+            <button mat-raised-button type="button" (click)="selectedIndex=selectedIndex-1">Back</button>
+            <button mat-raised-button type="button" [disabled]="!IsPricingFormValid" (click)="selectedIndex=selectedIndex+1">Next</button>
           </div>
         </section>
   
@@ -157,8 +157,8 @@
       <div class="row">
         <section class="mb-2">
           <div class="example-button-row">
-            <button mat-raised-button (click)="selectedIndex=selectedIndex-1">Back</button>
-            <button mat-raised-button [disabled]="!true" color="primary" (submit)="onSubmit()">Update Property</button>
+            <button mat-raised-button type="button" (click)="selectedIndex=selectedIndex-1">Back</button>
+            <button mat-raised-button type="submit" [disabled]="!true" color="primary" (submit)="onSubmit()">Update Property</button>
           </div>
         </section>
   
