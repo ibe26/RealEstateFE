@@ -68,20 +68,6 @@ export class AddPropertyComponent {
   public selectedIndex = 0;
   public yearList: Array<number> = [];
 
-  // public readonly maxAllowedFileSize=10*1024*1024;
-  // private uploader!:FileUploader;
-
-  // private initializeFileUploader(propertyID:number){
-  // this.uploader=new FileUploader({
-  // url:API.domainUrl+API.uploadImages+propertyID+'/',
-  // isHTML5:true,
-  // allowedFileType:['image'],
-  // removeAfterUpload:true,
-  // autoUpload:true,
-  // maxFileSize: this.maxAllowedFileSize
-  // })
-  // }
-
   public PropertyForm: FormGroup = this.formBuilder.group({
     propertyName: [null, [Validators.required]],
     propertyTypeID: [null, [Validators.required]],

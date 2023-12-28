@@ -1,6 +1,6 @@
 <mat-form-field>
     <mat-label>Districts</mat-label>
-    <mat-select [disabled]="cityName==undefined" [value]="defaultValue" (selectionChange)="onChange($event)">
+    <mat-select [disabled]="cityName==undefined" [(value)]="defaultValue" (selectionChange)="onChange($event)">
       <mat-option>Clear</mat-option>
       <mat-option  *ngFor="let district of districts" [value]="district">
         {{district}}

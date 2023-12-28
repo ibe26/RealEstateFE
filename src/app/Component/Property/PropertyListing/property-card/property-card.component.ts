@@ -37,8 +37,9 @@ export class PropertyCardComponent implements OnInit {
 
   }
   private _imageService = inject(ImageService);
-  private _propertyService=inject(PropertyService);
+  private _propertyService = inject(PropertyService);
   private _userService = inject(UserService);
+
   public isHovered = false;
   public isUser!: boolean;
   public imageUrl!: string;
@@ -47,9 +48,9 @@ export class PropertyCardComponent implements OnInit {
     alertify.confirm('Confirm Deletion?', () => {
       this._propertyService.delete(this.property.propertyID).subscribe(() => {
         alertify.success(`Successfully Deleted Property Listing`);
-        window.location.reload()
+        this._propertyService.propertyList$ = this._propertyService.getList();
       })
     }).set({ title: "Confirm action" });
   }
-  }
+}
 

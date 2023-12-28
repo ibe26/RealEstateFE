@@ -25,10 +25,6 @@ onInit(){
   
   public readonly property$=this._propertyService.getById(this.propertyID);
 	public readonly images$ = this._imageService.get(this.propertyID);
-public currentYear=new Date().getFullYear();
-
-
-
-
+  public currentYear=new Date().getFullYear();
 	
 }

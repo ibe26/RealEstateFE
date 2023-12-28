@@ -1,6 +1,6 @@
 <mat-form-field>
     <mat-label>Quarter</mat-label>
-    <mat-select [disabled]="cityNameAndDistrict!.city==null || cityNameAndDistrict!.district==null" [value]="defaultValue" (selectionChange)="onChange($event)">
+    <mat-select [disabled]="cityNameAndDistrict!.city==null || cityNameAndDistrict!.district==null" [(value)]="defaultValue" (selectionChange)="onChange($event)">
       <mat-option>Clear</mat-option>
       <mat-option  *ngFor="let quarter of quarters" [value]="quarter">
         {{quarter}}
