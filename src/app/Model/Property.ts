@@ -20,7 +20,7 @@ export interface Property extends PropertyDTO{
     dues:number,
     description:string,
     dateListed:Date,
-    buildedYear:number,
+    builtYear:number,
     floor:number,
     totalFloor:number
 }
@@ -43,7 +43,7 @@ export interface PropertyDTO{
     dues:number,
     description:string,
     dateListed:Date,
-    buildedYear:number,
+    builtYear:number,
     floor:number,
     totalFloor:number
 }

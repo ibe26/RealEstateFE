@@ -68,10 +68,10 @@
         <app-heat-systems-dropdown [defaultValue]="(property$|async)?.heatSystem" (heatSystemsValueChange)="onHeatSystemsChange($event)"></app-heat-systems-dropdown>
       </div>
       <div class="row">
-        <h2>Builded Year</h2>
+        <h2>Built Year*</h2>
         <mat-form-field style="width: 28%;">
-          <mat-label>Builded Year</mat-label>
-          <mat-select formControlName="buildedYear">
+          <mat-label>Built Year</mat-label>
+          <mat-select formControlName="builtYear">
             <mat-option *ngFor="let year of yearList" [value]="year">{{year}}</mat-option>
           </mat-select>
         </mat-form-field>

@@ -23,7 +23,6 @@ export class MainPageComponent implements OnInit{
         
         if(!userID)
         {
-          console.log()
           localStorage.removeItem(LocalStorageHelper.tokenKey);
           return;
         }

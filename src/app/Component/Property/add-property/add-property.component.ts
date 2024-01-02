@@ -80,7 +80,7 @@ export class AddPropertyComponent {
     dues: [null, [Validators.required]],
     balcony: [null, [Validators.required]],
     heatSystem: [null, [Validators.required]],
-    buildedYear: [null, [Validators.required]],
+    builtYear: [null, [Validators.required]],
     city: [undefined, [Validators.required]],
     district: [undefined, [Validators.required]],
     quarter: [undefined, [Validators.required]],
@@ -132,7 +132,7 @@ export class AddPropertyComponent {
       this.PropertyForm.get('bedroomCount')?.valid! &&
       this.PropertyForm.get('bathroomCount')?.valid! &&
       this.PropertyForm.get('balcony')?.valid! &&
-      this.PropertyForm.get('buildedYear')?.valid! &&
+      this.PropertyForm.get('builtYear')?.valid! &&
       this.PropertyForm.get('heatSystem')?.valid!
   }
   public get IsPricingFormValid(): boolean {

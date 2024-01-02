@@ -22,7 +22,6 @@ export class NavbarComponent implements OnInit {
         
         if(!userID)
         {
-          console.log()
           localStorage.removeItem(LocalStorageHelper.tokenKey);
           return;
         }

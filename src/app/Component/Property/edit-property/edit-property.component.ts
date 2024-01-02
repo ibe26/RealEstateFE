@@ -71,12 +71,14 @@ export class EditPropertyComponent {
           dues:                 [property.dues, [Validators.required]],
           balcony:              [property.balcony, [Validators.required]],
           heatSystem:           [property.heatSystem, [Validators.required]],
-          buildedYear:          [property.buildedYear, [Validators.required]],
+          builtYear:          [property.builtYear, [Validators.required]],
           description:          [property.description],
           floor:                [property.floor],
           totalFloor:           [property.totalFloor],
           userID:               [property.userID]
           })
+          console.log(property.quarter)
+          console.log(property.district)
       })
       }
     
@@ -161,7 +163,7 @@ export class EditPropertyComponent {
           this.PropertyForm.get('bedroomCount')?.valid! &&
           this.PropertyForm.get('bathroomCount')?.valid! &&
           this.PropertyForm.get('balcony')?.valid! &&
-          this.PropertyForm.get('buildedYear')?.valid! &&
+          this.PropertyForm.get('builtYear')?.valid! &&
           this.PropertyForm.get('heatSystem')?.valid!
           }
           public get IsPricingFormValid():boolean{

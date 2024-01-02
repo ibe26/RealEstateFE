@@ -23,14 +23,12 @@ export class QuarterDropdownComponent {
 
   private cityCode:any;
   public quarters!:string[];
+
   ngOnChanges(){
-    this.quarterValueChange.emit(undefined)
-    console.log(this.cityNameAndDistrict)
     if(this.cityNameAndDistrict!==undefined){
     this.cityCode=turkey.getCities().find(c=>c.name.toString().toLowerCase()==this.cityNameAndDistrict!.city.toString().toLowerCase())!.code;
     this.quarters=turkey.getNeighbourhoodsByCityCodeAndDistrict(this.cityCode,this.cityNameAndDistrict.district);
     }
-    
   }
 
   public onChange(event:any){

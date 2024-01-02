@@ -22,7 +22,7 @@ export class RegisterComponent {
   private userService=inject(UserService);
 
   public RegisterForm: FormGroup = this.formBuilder.group({
-    email: ['', [Validators.required]],
+    email: ['', [Validators.required,Validators.email]],
     firstName: ['', [Validators.required]],
     lastName: ['', [Validators.required]],
     password: ['', [Validators.required]]

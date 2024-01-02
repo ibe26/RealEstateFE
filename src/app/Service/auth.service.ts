@@ -16,7 +16,6 @@ export class AuthGuardTokenService implements CanActivate {
   private propertyService = inject(PropertyService);
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
-    console.log()
     return this.propertyService.getById(route.params['id']).pipe(map(property => {
       if( JSON.parse(JSON.stringify(jwtDecode(localStorage.getItem(LocalStorageHelper.tokenKey)!)))['ID'] == property.userID)
       {

@@ -23,8 +23,6 @@ export class DistrictDropdownComponent {
   public districts:any;
   
   ngOnChanges(){
-    this.districtValueChange.emit(undefined)
-    this.defaultValue=undefined
     if(this.cityName!=undefined){
     this.cityCode=turkey.getCities().find(c=>c.name.toString().toLowerCase()==this.cityName!.toString().toLowerCase())!.code;
     this.districts=turkey.getDistrictsByCityCode(this.cityCode);
