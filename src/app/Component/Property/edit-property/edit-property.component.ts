@@ -77,8 +77,6 @@ export class EditPropertyComponent {
           totalFloor:           [property.totalFloor],
           userID:               [property.userID]
           })
-          console.log(property.quarter)
-          console.log(property.district)
       })
       }
     
