@@ -24,7 +24,7 @@ onInit(){
   private readonly propertyID:number=this.activatedRoute.snapshot.params['id'];
   
   public readonly property$=this._propertyService.getById(this.propertyID);
-	public readonly images$ = this._imageService.get(this.propertyID);
+	public readonly images$ = this._imageService.get(this.propertyID,"Property");
   public currentYear=new Date().getFullYear();
 	
 }

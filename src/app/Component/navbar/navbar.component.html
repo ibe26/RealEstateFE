@@ -21,9 +21,22 @@
 
 <ng-template #LoggedInItems>
   <div *ngIf="User" style="float: right;">
-   <span [routerLink]="'profile/'+User.userID">{{ User.firstName + " " + User.lastName }}</span> 
-  <i> | </i>
-
-    <span (click)="Logout()">Logout</span>
+   <span style="font-size: larger;" [matMenuTriggerFor]="menu" >{{User|userName}}</span> 
   </div>
 </ng-template>
+
+<mat-menu #menu="matMenu">
+  <button *ngIf="User" mat-menu-item [routerLink]="'profile/'+User.userID">
+    <mat-icon>list</mat-icon>
+    <span>My Listings</span>
+  </button>
+  
+  <button [routerLink]="'portfolio/'+User.userID" mat-menu-item>
+    <mat-icon> pie_chart</mat-icon>
+    <span >Portfolio</span>
+  </button>
+  <button (click)="Logout()" mat-menu-item>
+    <mat-icon>exit_to_app</mat-icon>
+    <span>Logout</span>
+  </button>
+</mat-menu>

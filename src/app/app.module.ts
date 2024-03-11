@@ -22,11 +22,14 @@ import { RegisterComponent } from './Component/register/register.component';
 import { LoginComponent } from './Component/login/login.component';
 import { ProfileComponent } from './Component/profile/profile.component';
 import { UnauthorizedPageComponent } from './Component/unauthorized-page/unauthorized-page.component';
+import { UserNamePipe } from './Pipe/user-name.pipe';
+import { PortfolioComponent } from './Component/Property/portfolio/portfolio.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UnauthorizedPageComponent
+    UnauthorizedPageComponent,
+    PortfolioComponent,
   ],
   imports: [
     NgbModule,
@@ -50,6 +53,7 @@ import { UnauthorizedPageComponent } from './Component/unauthorized-page/unautho
     MainPageComponent,
     LoginComponent,
     ProfileComponent,
+    UserNamePipe
   ],
   providers: [],
   bootstrap: [AppComponent]

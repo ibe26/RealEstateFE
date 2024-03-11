@@ -47,7 +47,7 @@ export class EditPropertyComponent {
 
   
   ngOnInit():void{
-    this.imageService.get(this.propertyID).subscribe(result=>this.imageService.photos=result)
+    this.imageService.get(this.propertyID,"Property").subscribe(result=>this.imageService.photos=result)
     this.propertyListingTypeService.getList().subscribe((data:Array<PropertyListingType>)=>{
       this.propertyListingTypes=data;
       })
@@ -134,7 +134,7 @@ export class EditPropertyComponent {
                     })
                   }
                 formData.append('formFile',files[i],files[i].name)
-                this.imageService.post(formData,this.propertyID).subscribe();
+                this.imageService.post(formData,this.propertyID,"Property").subscribe();
               }
             }
             
@@ -149,7 +149,7 @@ export class EditPropertyComponent {
             }
           }
           public onImageDelete(imageName:string){
-            this.imageService.delete(imageName,this.propertyID).subscribe(()=>{
+            this.imageService.delete(imageName,this.propertyID,'Property').subscribe(()=>{
               this.imageService.photos=this.imageService.photos.filter(p=>p.name!==imageName);
             })
           }

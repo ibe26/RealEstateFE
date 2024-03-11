@@ -10,6 +10,7 @@ import { LoginComponent } from './Component/login/login.component';
 import { ProfileComponent } from './Component/profile/profile.component';
 import { AuthGuardTokenService } from './Service/auth.service';
 import { UnauthorizedPageComponent } from './Component/unauthorized-page/unauthorized-page.component';
+import { PortfolioComponent } from './Component/Property/portfolio/portfolio.component';
 
 const routes: Routes = [
   {path:'main-page',component:MainPageComponent},
@@ -21,7 +22,8 @@ const routes: Routes = [
   {path:'register',component:RegisterComponent},
   {path:'login',component:LoginComponent},
   {path:'profile/:id',component:ProfileComponent},
-  {path:'unauthorized',component:UnauthorizedPageComponent}
+  {path:'unauthorized',component:UnauthorizedPageComponent},
+  {path:'portfolio/:id',component:PortfolioComponent}
 ];
 
 @NgModule({

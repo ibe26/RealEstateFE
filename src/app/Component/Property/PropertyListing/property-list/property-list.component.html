@@ -1,5 +1,5 @@
 <div *ngIf="propertyList;else LoadingScreen">
-    <div *ngIf="propertyList!.length===0">
+    <div *ngIf="propertyList===undefined">
         <ng-container *ngTemplateOutlet="NoProperty"></ng-container>
     </div>
     <div *ngFor="let property of propertyList">

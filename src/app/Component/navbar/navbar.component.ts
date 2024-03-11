@@ -7,13 +7,16 @@ import { UserService } from 'src/app/Service/user.service';
 import { LocalStorageHelper } from 'src/app/API';
 import { User } from 'src/app/Model/User';
 import { CommonModule } from '@angular/common';
+import {MatMenuModule} from '@angular/material/menu';
+import { UserNamePipe } from 'src/app/Pipe/user-name.pipe';
+
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
   standalone: true,
-  imports: [MatToolbarModule, MatButtonModule,MatIconModule,RouterModule,CommonModule],
+  imports: [MatToolbarModule, MatButtonModule,MatIconModule,RouterModule,CommonModule,MatMenuModule,UserNamePipe],
 })
 export class NavbarComponent implements OnInit {
  public ngOnInit(): void {

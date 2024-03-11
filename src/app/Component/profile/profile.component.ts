@@ -18,7 +18,7 @@ import { ImageService } from 'src/app/Service/image.service';
 export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getById(this.activatedRoute.snapshot.params['id']).subscribe(user=>{
-      this.propertyList=user.properties;
+      this.propertyList=user.listedProperties;
     })
   }
 
