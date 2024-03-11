@@ -31,7 +31,7 @@
     <span>My Listings</span>
   </button>
   
-  <button [routerLink]="'portfolio/'+User.userID" mat-menu-item>
+  <button *ngIf="User" [routerLink]="'portfolio/'+User.userID" mat-menu-item>
     <mat-icon> pie_chart</mat-icon>
     <span >Portfolio</span>
   </button>

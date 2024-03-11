@@ -1,5 +1,5 @@
 <div class="row" *ngIf="User">
-    <button routerLink="/add-property" class="btn btn-danger">+ List Your Property</button>
+    <button routerLink="/add-property" type="button" class="btn btn-danger">+ List Your Property</button>
 </div>
 <div class="row">
     <app-property-list [propertyList]="(_propertyService.propertyList$|async)!"></app-property-list>

@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 import { Property } from 'src/app/Model/Property';
 import { AddressModule } from 'src/app/Modules/address/address.module';
 import { PropertyTypesModule } from 'src/app/Modules/property-types/property-types.module';
+import { map } from 'rxjs';
 
 
 
@@ -61,7 +62,7 @@ export class FilterBarComponent {
   
 
     public Submit():void{
-      this._propertyService.getFilteredList(this.FilterForm.value).subscribe((data:Array<Property>)=>{
+      this._propertyService.getFilteredList(this.FilterForm.value).pipe(map(list=>list.filter(p=>p.onListing===true))).subscribe((data:Array<Property>)=>{
         localStorage.setItem('filteredPropertyList',JSON.stringify(data));
         if(this.router.url==='/filtered-list')
         {

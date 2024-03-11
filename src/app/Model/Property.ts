@@ -23,6 +23,7 @@ export interface Property extends PropertyDTO{
     builtYear:number,
     floor:number,
     totalFloor:number
+    onListing:boolean
 }
 
 export interface PropertyDTO{

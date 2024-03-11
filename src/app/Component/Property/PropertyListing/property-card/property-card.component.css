@@ -1,0 +1,85 @@
+.property-card {
+    box-shadow: 0px 0px 20px grey;
+}
+
+.image-container {
+    width: 30%; /* Adjust as needed */
+    display: inline-block;
+    vertical-align: top;
+}
+
+.property-image {
+    max-width: 400px;
+    height: 300px;
+}
+
+.details-info {
+    width: 60%; /* Adjust as needed */
+    display: inline-block;
+    vertical-align: top;
+}
+
+.property-name {
+    font-size: 19pt;
+    margin-top: 0;
+}
+
+.location-info {
+    margin-top: 10px;
+}
+
+.quarter-info {
+    margin-top: 5px;
+}
+
+.property-specs {
+    margin-top: 20px;
+}
+
+.price-info {
+    width: 20%; /* Adjust as needed */
+    display: inline-block;
+    vertical-align: top;
+}
+
+.price-type {
+    font-size: 24pt;
+}
+
+.price {
+    font-size: 17pt;
+}
+
+.date-listed-info {
+    margin-top: 20px;
+}
+
+.date-listed-header {
+    font-size: 19pt;
+    margin-top: 0;
+}
+
+.actions {
+    margin-top: 20px;
+}
+
+.view-button,
+.edit-button,
+.delete-button {
+    width: auto;
+    margin-right: 5px;
+}
+
+.transaction-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-5deg); /* Adjust the rotation angle as needed */
+    font-size: 24pt; /* Adjust the font size as needed */
+    color: #2ecc71; /* Slightly green color */
+    display: none; /* Initially hidden */
+}
+
+.property-card:hover .transaction-text {
+    display: block; /* Show the text when hovered */
+}

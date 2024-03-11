@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { LocalStorageHelper } from 'src/app/API';
 import { User } from 'src/app/Model/User';
 import { UserService } from 'src/app/Service/user.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-main-page',
@@ -17,7 +18,7 @@ import { UserService } from 'src/app/Service/user.service';
 })
 export class MainPageComponent implements OnInit{
   ngOnInit(): void {
-    this._propertyService.propertyList$=this._propertyService.getList();
+    this._propertyService.propertyList$=this._propertyService.getList().pipe(map(list=>list.filter(p=>p.onListing===true)));
     if(localStorage.getItem(LocalStorageHelper.tokenKey)){
       this.userService.validateToken().subscribe({next:(userID:number)=>{
         

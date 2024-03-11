@@ -17,7 +17,7 @@ const routes: Routes = [
   {path:'',redirectTo:'main-page',pathMatch:'full'},
   {path:'view-property/:id',component:PropertyViewComponent},
   {path:'filtered-list',component:FilteredListComponent},
-  {path:'add-property',component:AddPropertyComponent,canActivate:[AuthGuardTokenService]},
+  {path:'add-property',component:AddPropertyComponent},
   {path:'edit-property/:id',component:EditPropertyComponent,canActivate:[AuthGuardTokenService]},
   {path:'register',component:RegisterComponent},
   {path:'login',component:LoginComponent},

@@ -25,8 +25,8 @@ export class QuarterDropdownComponent {
   public quarters!:string[];
 
   ngOnChanges(){
-    if(this.cityNameAndDistrict!==undefined){
-    this.cityCode=turkey.getCities().find(c=>c.name.toString().toLowerCase()==this.cityNameAndDistrict!.city.toString().toLowerCase())!.code;
+    if(this.cityNameAndDistrict!==undefined && this.cityNameAndDistrict.city!==null){
+    this.cityCode=turkey.getCities().find(c=>c.name.toString().toLowerCase()==this.cityNameAndDistrict!.city!.toString().toLowerCase())!.code;
     this.quarters=turkey.getNeighbourhoodsByCityCodeAndDistrict(this.cityCode,this.cityNameAndDistrict.district);
     }
   }
