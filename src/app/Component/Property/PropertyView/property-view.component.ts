@@ -21,10 +21,10 @@ onInit(){
   private readonly _imageService=inject(ImageService);
   private readonly activatedRoute=inject(ActivatedRoute)
 
-  private readonly propertyID:number=this.activatedRoute.snapshot.params['id'];
+  private readonly propertyID:string=this.activatedRoute.snapshot.params['id'];
   
   public readonly property$=this._propertyService.getById(this.propertyID);
-	public readonly images$ = this._imageService.get(this.propertyID,"Property");
+	public readonly images$ = this._propertyService.imageGet(this.propertyID);
   public currentYear=new Date().getFullYear();
 	
 }

@@ -17,7 +17,6 @@ import { PropertyTypesModule } from 'src/app/Modules/property-types/property-typ
 import alertify from 'alertifyjs';
 import { PropertyService } from 'src/app/Service/property.service';
 import { Property } from 'src/app/Model/Property';
-import { LocalStorageHelper } from 'src/app/API';
 import { UserService } from 'src/app/Service/user.service';
 
 @Component({
@@ -52,7 +51,7 @@ export class AddPropertyComponent {
     }
     this.userService.validateToken().subscribe(userID=>{
       if(userID){
-        this.PropertyForm.controls['userID'].setValue(userID);
+        this.PropertyForm.controls['userID'].setValue(userID.value);
       }
     })
   }

@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { LoginDTO, RegisterDTO, User, UserDTO } from '../Model/User';
 import { API, LocalStorageHelper } from '../API';
 import { Observable } from 'rxjs';
+import { JsonResult } from '../Model/JsonResult';
 
 @Injectable({providedIn: 'root'})
 export class UserService {
@@ -14,7 +15,7 @@ export class UserService {
     public getList():Observable<Array<User>>{
       return this.httpClient.get<Array<User>>(this.domain+API.getList)
     }
-    public getById(id:number):Observable<UserDTO>{
+    public getById(id:string):Observable<UserDTO>{
       return this.httpClient.get<UserDTO>(`${this.domain+API.getById+id}`)
     }
     public register(registerDTO:RegisterDTO):Observable<User>{
@@ -23,7 +24,7 @@ export class UserService {
     public login(loginDTO:LoginDTO):Observable<UserDTO>{
      return this.httpClient.post<UserDTO>(this.domain+API.login,loginDTO);
     }
-    public validateToken():Observable<number>{
-      return this.httpClient.get<number>(this.domain+API.validateToken,{params:this.httpParams.append("token",this.token!)});
+    public validateToken():Observable<JsonResult>{
+      return this.httpClient.get<JsonResult>(this.domain+API.validateToken,{params:this.httpParams.append("token",this.token!)});
     }
 }

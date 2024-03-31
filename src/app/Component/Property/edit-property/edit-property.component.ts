@@ -18,7 +18,6 @@ import { PropertyService } from 'src/app/Service/property.service';
 import { HeatSystemsDropdownComponent } from '../../Dropdowns/heat-systems-dropdown/heat-systems-dropdown.component';
 import alertify from 'alertifyjs';
 import { Observable } from 'rxjs';
-import { ImageService } from 'src/app/Service/image.service';
 import {MatIconModule} from '@angular/material/icon';
 
 @Component({
@@ -47,7 +46,7 @@ export class EditPropertyComponent {
 
   
   ngOnInit():void{
-    this.imageService.get(this.propertyID,"Property").subscribe(result=>this.imageService.photos=result)
+    this.propertyService.imageGet(this.propertyID).subscribe(result=>this.propertyService.photos=result)
     this.propertyListingTypeService.getList().subscribe((data:Array<PropertyListingType>)=>{
       this.propertyListingTypes=data;
       })
@@ -71,7 +70,7 @@ export class EditPropertyComponent {
           dues:                 [property.dues, [Validators.required]],
           balcony:              [property.balcony, [Validators.required]],
           heatSystem:           [property.heatSystem, [Validators.required]],
-          builtYear:          [property.builtYear, [Validators.required]],
+          builtYear:            [property.builtYear, [Validators.required]],
           description:          [property.description],
           floor:                [property.floor],
           totalFloor:           [property.totalFloor],
@@ -82,12 +81,11 @@ export class EditPropertyComponent {
     
       private formBuilder=inject(FormBuilder);
       private propertyListingTypeService=inject(PropertyListingTypeService);
-      private propertyService=inject(PropertyService);
-      public imageService=inject(ImageService);
+      public propertyService=inject(PropertyService);
       private router=inject(Router);
       private readonly activatedRoute=inject(ActivatedRoute)
 
-        private readonly propertyID:number=this.activatedRoute.snapshot.params['id'];
+        private readonly propertyID:string=this.activatedRoute.snapshot.params['id'];
         private propertyListingTypes:Array<PropertyListingType>=[];
         public readonly property$:Observable<Property>=this.propertyService.getById(this.propertyID);
         public currentPropertyListingType:string="sale";
@@ -123,18 +121,18 @@ export class EditPropertyComponent {
             const files=$event.target.files;
             let formData=new FormData();
             for(let i=0;i<files.length;i++){
-              if(!this.imageService.photos.find(p=>p.name==files[i].name))
+              if(!this.propertyService.photos.find(p=>p.name==files[i].name))
               {
                 const reader = new FileReader();
                   reader.readAsDataURL(files[i]);
                   reader.onload=(events:any)=>{
-                    this.imageService.photos.push({
+                    this.propertyService.photos.push({
                       url:events.target.result,
                       name:files[i].name
                     })
                   }
                 formData.append('formFile',files[i],files[i].name)
-                this.imageService.post(formData,this.propertyID,"Property").subscribe();
+                this.propertyService.imagePost(formData,this.propertyID).subscribe();
               }
             }
             
@@ -149,8 +147,8 @@ export class EditPropertyComponent {
             }
           }
           public onImageDelete(imageName:string){
-            this.imageService.delete(imageName,this.propertyID,'Property').subscribe(()=>{
-              this.imageService.photos=this.imageService.photos.filter(p=>p.name!==imageName);
+            this.propertyService.imageDelete(imageName,this.propertyID).subscribe(()=>{
+              this.propertyService.photos=this.propertyService.photos.filter(p=>p.name!==imageName);
             })
           }
     

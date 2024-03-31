@@ -9,6 +9,7 @@ import { User } from 'src/app/Model/User';
 import { CommonModule } from '@angular/common';
 import {MatMenuModule} from '@angular/material/menu';
 import { UserNamePipe } from 'src/app/Pipe/user-name.pipe';
+import { JsonResult } from 'src/app/Model/JsonResult';
 
 
 @Component({
@@ -21,14 +22,14 @@ import { UserNamePipe } from 'src/app/Pipe/user-name.pipe';
 export class NavbarComponent implements OnInit {
  public ngOnInit(): void {
     if(localStorage.getItem(LocalStorageHelper.tokenKey)){
-      this.userService.validateToken().subscribe({next:(userID:number)=>{
+      this.userService.validateToken().subscribe({next:(userID:JsonResult)=>{
         
         if(!userID)
         {
           localStorage.removeItem(LocalStorageHelper.tokenKey);
           return;
         }
-        this.userService.getById(userID).subscribe(user=>{
+        this.userService.getById(userID.value).subscribe(user=>{
           this.User=user;
         })
       },error:err=>{

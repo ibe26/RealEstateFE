@@ -21,13 +21,13 @@ export class PropertyCardComponent implements OnInit {
 
   @Input() property!: Property;
   ngOnInit(): void {
-    this._imageService.get(this.property.propertyID,"Property").subscribe(images => {
+    this._propertyService.imageGet(this.property.propertyID).subscribe(images => {
       this.imageUrl = images[0].url;
     });
     const token = localStorage.getItem(LocalStorageHelper.tokenKey);
     if (token) {
       this._userService.validateToken().subscribe(data => {
-        if (data === this.property.userID) {
+        if (data.value === this.property.userID) {
           this.isUser = true;
         }
       })
@@ -36,7 +36,6 @@ export class PropertyCardComponent implements OnInit {
 
 
   }
-  private _imageService = inject(ImageService);
   private _propertyService = inject(PropertyService);
   private _userService = inject(UserService);
 

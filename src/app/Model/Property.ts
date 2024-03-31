@@ -2,8 +2,8 @@ import { PropertyListingType } from "./PropertyListingType"
 import { PropertyType } from "./PropertyType"
 
 export interface Property extends PropertyDTO{
-    propertyID:number,
-    userID:number,
+    propertyID:string,
+    userID:string,
     propertyName:string,
     city:string,
     district:string,
@@ -28,7 +28,7 @@ export interface Property extends PropertyDTO{
 
 export interface PropertyDTO{
     propertyName:string,
-    userID:number,
+    userID:string,
     city:string,
     district:string,
     quarter:string,

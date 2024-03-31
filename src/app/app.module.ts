@@ -24,6 +24,8 @@ import { ProfileComponent } from './Component/profile/profile.component';
 import { UnauthorizedPageComponent } from './Component/unauthorized-page/unauthorized-page.component';
 import { UserNamePipe } from './Pipe/user-name.pipe';
 import { PortfolioComponent } from './Component/Property/portfolio/portfolio.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
+
 
 @NgModule({
   declarations: [
@@ -53,7 +55,8 @@ import { PortfolioComponent } from './Component/Property/portfolio/portfolio.com
     MainPageComponent,
     LoginComponent,
     ProfileComponent,
-    UserNamePipe
+    UserNamePipe,
+    NgApexchartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -8,6 +8,7 @@ import { LocalStorageHelper } from 'src/app/API';
 import { User } from 'src/app/Model/User';
 import { UserService } from 'src/app/Service/user.service';
 import { map } from 'rxjs';
+import { JsonResult } from 'src/app/Model/JsonResult';
 
 @Component({
   selector: 'app-main-page',
@@ -20,14 +21,14 @@ export class MainPageComponent implements OnInit{
   ngOnInit(): void {
     this._propertyService.propertyList$=this._propertyService.getList().pipe(map(list=>list.filter(p=>p.onListing===true)));
     if(localStorage.getItem(LocalStorageHelper.tokenKey)){
-      this.userService.validateToken().subscribe({next:(userID:number)=>{
+      this.userService.validateToken().subscribe({next:(userID:JsonResult)=>{
         
         if(!userID)
         {
           localStorage.removeItem(LocalStorageHelper.tokenKey);
           return;
         }
-        this.userService.getById(userID).subscribe(user=>{
+        this.userService.getById(userID.value).subscribe(user=>{
           this.User=user;
         })
       },error:err=>{

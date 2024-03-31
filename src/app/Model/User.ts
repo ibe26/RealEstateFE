@@ -1,7 +1,7 @@
 import { Property } from "./Property"
 
 export interface UserDTO {
-    userID:number,
+    userID:string,
     email:string,
     firstName:string,
     lastName:string,
@@ -10,7 +10,7 @@ export interface UserDTO {
   }
   
   export interface User{
-    userID:number,
+    userID:string,
     email:string,
     firstName:string,
     lastName:string,
@@ -27,4 +27,3 @@ export interface UserDTO {
     firstName:string,
     lastName:string
   }
-  

@@ -6,7 +6,6 @@ import { UserService } from 'src/app/Service/user.service';
 import { PropertyListComponent } from '../Property/PropertyListing/property-list/property-list.component';
 import { MatButtonModule } from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
-import { ImageService } from 'src/app/Service/image.service';
 
 @Component({
   selector: 'app-profile',
@@ -24,7 +23,6 @@ export class ProfileComponent implements OnInit {
 
   private userService=inject(UserService);
   private activatedRoute=inject(ActivatedRoute);
-  public imageService=inject(ImageService);
   public image!:any;
   public propertyList!:Array<Property>
 }
