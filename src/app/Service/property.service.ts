@@ -44,8 +44,8 @@ export class PropertyService {
   public imagePost(images:FormData,propertyID:string):Observable<string>{
     return this.httpClient.post<string>(this.domainImage+propertyID,images,{headers:this.headers});
   }
-  public imageDelete(imageName:string,propertyID:string):Observable<number>{
-    return this.httpClient.delete<number>(this.domainImage+`?propertyGUID=${propertyID}&imageName=${imageName}`,{headers:this.headers})
+  public imageDelete(imageName:string,propertyID:string):Observable<JsonResult>{
+    return this.httpClient.delete<JsonResult>(this.domainImage+`?propertyGUID=${propertyID}&imageName=${imageName}`,{headers:this.headers})
   }
   public photos:Array<Photo>=[];
   public propertyList$!:Observable<Array<Property>>;

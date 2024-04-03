@@ -14,10 +14,6 @@ export class PropertyTypeService {
     return this.httpClient.get<Array<PropertyType>>(this.domain+API.getList)
   }
 
-  // public getById(id:number):Observable<PropertyType>{
-  //   return this.httpClient.get<PropertyType>(`${this.domain+API.getById+id}`)
-  // }
-
   public post(propertyTypeDTO:PropertyTypeDTO):Observable<any>{
     return this.httpClient.post<any>(this.domain+API.insert,propertyTypeDTO)
   }

@@ -30,12 +30,12 @@
       </div>
       <div class="row">
         <h2>I want to*</h2>
-        <app-property-listing-type-dropdown [defaultValue]="(property$|async)?.propertyListingType?.propertyListingTypeID" (PropertyListingTypeID)="onListingTypeChange($event)">
+        <app-property-listing-type-dropdown [defaultValue]="(property$|async)?.propertyListingTypeID" (PropertyListingTypeID)="onListingTypeChange($event)">
         </app-property-listing-type-dropdown>
       </div>
       <div class="row">
         <h2>Type of Property*</h2>
-        <app-property-type-dropdown [defaultValue]="(property$|async)?.propertyType?.propertyTypeID" (PropertyTypeID)="onTypeChange($event)">
+        <app-property-type-dropdown [defaultValue]="(property$|async)?.propertyTypeID" (PropertyTypeID)="onTypeChange($event)">
         </app-property-type-dropdown>
       </div>
       <div class="row">
@@ -79,13 +79,13 @@
       <div class="row">
         <h2>Floor</h2>
         <mat-form-field style="width: 28%;">
-          <input matInput required type="number" formControlName="floor" min="0">
+          <input matInput type="number" formControlName="floor" min="0">
         </mat-form-field>
       </div>
       <div class="row">
         <h2>Building Floors</h2>
         <mat-form-field style="width: 28%;">
-          <input matInput required type="number" formControlName="totalFloor" min="0">
+          <input matInput type="number" formControlName="totalFloor" min="0">
         </mat-form-field>
       </div>
   

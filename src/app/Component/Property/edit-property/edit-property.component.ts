@@ -55,10 +55,11 @@ export class EditPropertyComponent {
       this.yearList[index]=year-index;
       }
       this.property$.subscribe((property:Property)=>{
+        console.log(property)
         this.PropertyForm=this.formBuilder.group({
           propertyName:         [property.propertyName, [Validators.required]],
-          propertyTypeID:       [property.propertyType.propertyTypeID, [Validators.required]],
-          propertyListingTypeID:[property.propertyListingType.propertyListingTypeID, [Validators.required]],
+          propertyTypeID:       [property.propertyTypeID, [Validators.required]],
+          propertyListingTypeID:[property.propertyListingTypeID, [Validators.required]],
           propertyPrice:        [property.propertyPrice, [Validators.required]],
           bedroomCount:         [property.bedroomCount, [Validators.required]],
           bathroomCount:        [property.bathroomCount, [Validators.required]],

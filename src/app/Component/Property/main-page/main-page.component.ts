@@ -2,7 +2,6 @@ import { Component, OnInit, inject } from '@angular/core';
 import { PropertyService } from 'src/app/Service/property.service';
 import { PropertyListComponent } from '../PropertyListing/property-list/property-list.component';
 import { RouterModule } from '@angular/router';
-import { Property } from 'src/app/Model/Property';
 import { CommonModule } from '@angular/common';
 import { LocalStorageHelper } from 'src/app/API';
 import { User } from 'src/app/Model/User';
@@ -28,14 +27,15 @@ export class MainPageComponent implements OnInit{
           localStorage.removeItem(LocalStorageHelper.tokenKey);
           return;
         }
-        this.userService.getById(userID.value).subscribe(user=>{
+        this.userService.getById(userID.value).subscribe({next:(user=>{
           this.User=user;
-        })
-      },error:err=>{
-        if(err.status===400){
+        }),error:err=>{
           localStorage.removeItem(LocalStorageHelper.tokenKey);
           return;
-        }
+        }})
+      },error:err=>{
+          localStorage.removeItem(LocalStorageHelper.tokenKey);
+          return;
       }})
     }
   }
