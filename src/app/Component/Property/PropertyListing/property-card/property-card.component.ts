@@ -22,6 +22,7 @@ export class PropertyCardComponent implements OnInit {
   @Input() property!: Property;
   ngOnInit(): void {
     this._propertyService.imageGet(this.property.propertyID).subscribe(images => {
+      console.log(images)
       this.imageUrl = images[0].url;
     });
     const token = localStorage.getItem(LocalStorageHelper.tokenKey);

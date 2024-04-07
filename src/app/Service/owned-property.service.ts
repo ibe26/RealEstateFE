@@ -4,6 +4,7 @@ import { API, LocalStorageHelper } from '../API';
 import { Observable } from 'rxjs';
 import { OwnedProperty, OwnedPropertyDTO } from '../Model/OwnedProperty';
 import { JsonResult } from '../Model/JsonResult';
+import { Photo } from '../Model/Photo';
 
 @Injectable({
   providedIn: 'root'
@@ -36,4 +37,13 @@ export class OwnedPropertyService {
     return this.httpClient.delete<JsonResult>(this.domain+`${id}`,{headers:this.headers})
   }
 
+  public imageGet(propertyID:string):Observable<Array<Photo>>{
+    return this.httpClient.get<Array<Photo>>(this.domainImage+propertyID);
+  }
+  public imagePost(images:FormData,propertyID:number):Observable<string>{
+    return this.httpClient.post<string>(this.domainImage+propertyID,images,{headers:this.headers});
+  }
+  public imageDelete(imageName:string,propertyID:number):Observable<JsonResult>{
+    return this.httpClient.delete<JsonResult>(this.domainImage+`?id=${propertyID}&imageName=${imageName}`,{headers:this.headers})
+  }
 }
