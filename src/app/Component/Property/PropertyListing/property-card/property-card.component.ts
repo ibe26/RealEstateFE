@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { Property } from 'src/app/Model/Property';
-import { ImageService } from 'src/app/Service/image.service';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -22,7 +21,6 @@ export class PropertyCardComponent implements OnInit {
   @Input() property!: Property;
   ngOnInit(): void {
     this._propertyService.imageGet(this.property.propertyID).subscribe(images => {
-      console.log(images)
       this.imageUrl = images[0].url;
     });
     const token = localStorage.getItem(LocalStorageHelper.tokenKey);

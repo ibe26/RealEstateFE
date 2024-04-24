@@ -43,7 +43,6 @@ import {MatIconModule} from '@angular/material/icon';
 })
 
 export class EditPropertyComponent {
-
   
   ngOnInit():void{
     this.propertyService.imageGet(this.propertyID).subscribe(result=>this.propertyService.photos=result)
@@ -55,7 +54,6 @@ export class EditPropertyComponent {
       this.yearList[index]=year-index;
       }
       this.property$.subscribe((property:Property)=>{
-        console.log(property)
         this.PropertyForm=this.formBuilder.group({
           propertyName:         [property.propertyName, [Validators.required]],
           propertyTypeID:       [property.propertyTypeID, [Validators.required]],
@@ -72,13 +70,16 @@ export class EditPropertyComponent {
           balcony:              [property.balcony, [Validators.required]],
           heatSystem:           [property.heatSystem, [Validators.required]],
           builtYear:            [property.builtYear, [Validators.required]],
+          onListing:            [property.onListing,[Validators.required]],
           description:          [property.description],
           floor:                [property.floor],
           totalFloor:           [property.totalFloor],
           userID:               [property.userID]
           })
+          this.currentPropertyListingType=property.propertyListingType.propertyListingTypeName;
       })
       }
+      public PropertyForm!:FormGroup;
     
       private formBuilder=inject(FormBuilder);
       private propertyListingTypeService=inject(PropertyListingTypeService);
@@ -89,14 +90,13 @@ export class EditPropertyComponent {
         private readonly propertyID:string=this.activatedRoute.snapshot.params['id'];
         private propertyListingTypes:Array<PropertyListingType>=[];
         public readonly property$:Observable<Property>=this.propertyService.getById(this.propertyID);
-        public currentPropertyListingType:string="sale";
+        public currentPropertyListingType!:string;
         
         
         //selectedIndex is used for navigating throughout the tab.
         public selectedIndex=0;
         public yearList:Array<number>=[];
     
-          public PropertyForm!:FormGroup;
     
           public onTypeChange($event: number) {
           this.PropertyForm.controls['propertyTypeID'].setValue($event);

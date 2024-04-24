@@ -16,8 +16,11 @@ import { AddressModule } from 'src/app/Modules/address/address.module';
 import { PropertyTypesModule } from 'src/app/Modules/property-types/property-types.module';
 import alertify from 'alertifyjs';
 import { PropertyService } from 'src/app/Service/property.service';
-import { Property } from 'src/app/Model/Property';
+import { Property, PropertyDTO } from 'src/app/Model/Property';
 import { UserService } from 'src/app/Service/user.service';
+import {MatStepperModule} from '@angular/material/stepper';
+import {CdkStepper, CdkStepperModule} from '@angular/cdk/stepper';
+
 
 @Component({
   selector: 'app-add-property',
@@ -36,7 +39,9 @@ import { UserService } from 'src/app/Service/user.service';
     MatRadioModule,
     MatTabsModule,
     HeatSystemsDropdownComponent,
-    MatSelectModule
+    MatSelectModule,
+    MatStepperModule,
+    CdkStepperModule
   ]
 })
 export class AddPropertyComponent {
@@ -51,7 +56,7 @@ export class AddPropertyComponent {
     }
     this.userService.validateToken().subscribe(userID=>{
       if(userID){
-        this.PropertyForm.controls['userID'].setValue(userID.value);
+        this.BasicInfoForm.controls['userID'].setValue(userID.value);
       }
     })
   }
@@ -67,56 +72,89 @@ export class AddPropertyComponent {
   public selectedIndex = 0;
   public yearList: Array<number> = [];
 
-  public PropertyForm: FormGroup = this.formBuilder.group({
+
+  public BasicInfoForm:FormGroup=this.formBuilder.group({
     propertyName: [null, [Validators.required]],
     propertyTypeID: [null, [Validators.required]],
     propertyListingTypeID: [null, [Validators.required]],
-    propertyPrice: [null, [Validators.required]],
     bedroomCount: [null, [Validators.required]],
     bathroomCount: [null, [Validators.required]],
-    grossArea: [null, [Validators.required]],
-    netArea: [null, [Validators.required]],
-    dues: [null, [Validators.required]],
     balcony: [null, [Validators.required]],
     heatSystem: [null, [Validators.required]],
     builtYear: [null, [Validators.required]],
+    description: [null],
+    onListing:[true],
+    floor: [null],
+    totalFloor: [null],
+    userID:[null,[Validators.required]],
+  })
+
+  public PricingAndAreaForm:FormGroup=this.formBuilder.group({
+    grossArea: [null, [Validators.required]],
+    netArea: [null, [Validators.required]],
+    dues: [null, [Validators.required]],
+    propertyPrice: [null, [Validators.required]],
+  })
+
+  public AddressForm:FormGroup=this.formBuilder.group({
     city: [undefined, [Validators.required]],
     district: [undefined, [Validators.required]],
     quarter: [undefined, [Validators.required]],
-    userID:[null,[Validators.required]],
-    description: [null],
-    floor: [null],
-    totalFloor: [null]
   })
 
+  
   public onTypeChange($event: number) {
-    this.PropertyForm.controls['propertyTypeID'].setValue($event);
+    this.BasicInfoForm.controls['propertyTypeID'].setValue($event);
   }
   public onListingTypeChange($event: number) {
-    this.PropertyForm.controls['propertyListingTypeID'].setValue($event);
+    this.BasicInfoForm.controls['propertyListingTypeID'].setValue($event);
     this.currentPropertyListingType = this.propertyListingTypes.find(lpt => lpt.propertyListingTypeID === $event)?.propertyListingTypeName!;
 
   }
   public onCityChange($event: string) {
-    this.PropertyForm.controls['city'].setValue($event);
-    this.PropertyForm.controls['district'].setValue(undefined);
-    this.PropertyForm.controls['quarter'].setValue(undefined);
+    this.AddressForm.controls['city'].setValue($event);
+    this.AddressForm.controls['district'].setValue(undefined);
+    this.AddressForm.controls['quarter'].setValue(undefined);
   }
   public onDistrictChange($event: string) {
-    this.PropertyForm.controls['district'].setValue($event);
-    this.PropertyForm.controls['quarter'].setValue(undefined);
+    this.AddressForm.controls['district'].setValue($event);
+    this.AddressForm.controls['quarter'].setValue(undefined);
   }
   public onQuarterChange($event: string) {
-    this.PropertyForm.controls['quarter'].setValue($event);
+    this.AddressForm.controls['quarter'].setValue($event);
   }
   public onHeatSystemsChange($event: string) {
-    this.PropertyForm.controls['heatSystem'].setValue($event);
+    this.BasicInfoForm.controls['heatSystem'].setValue($event);
   }
   public onSubmit() {
  
-    if (this.PropertyForm.valid) {
+    if (this.AddressForm.valid) {
+        const propertyDto: PropertyDTO = {
+          propertyName: this.BasicInfoForm.get('propertyName')?.value,
+          userID: this.BasicInfoForm.get('userID')?.value,
+          city: this.AddressForm.get('city')?.value,
+          district: this.AddressForm.get('district')?.value,
+          quarter:this.AddressForm.get('quarter')?.value,
+          propertyTypeID: this.BasicInfoForm.get('propertyTypeID')?.value,
+          propertyListingTypeID: this.BasicInfoForm.get('propertyListingTypeID')?.value,
+          bedroomCount: this.BasicInfoForm.get('bedroomCount')?.value,
+          bathroomCount: this.BasicInfoForm.get('bathroomCount')?.value,
+          balcony: this.BasicInfoForm.get('balcony')?.value,
+          heatSystem: this.BasicInfoForm.get('heatSystem')?.value,
+          builtYear: this.BasicInfoForm.get('builtYear')?.value,
+          description: this.BasicInfoForm.get('description')?.value,
+          onListing: this.BasicInfoForm.get('onListing')?.value,
+          floor: this.BasicInfoForm.get('floor')?.value,
+          totalFloor: this.BasicInfoForm.get('totalFloor')?.value,
+          dateListed:new Date(),
+          grossArea: this.PricingAndAreaForm.get('grossArea')?.value,
+          netArea: this.PricingAndAreaForm.get('netArea')?.value,
+          dues: this.PricingAndAreaForm.get('dues')?.value,
+          propertyPrice: this.PricingAndAreaForm.get('propertyPrice')?.value,
+        
+      };
       alertify.confirm('Confirm Listing? (Adding images will be done after listing in the following page.)', () => {
-        this.propertyService.post(this.PropertyForm.value).subscribe((property: Property) => {
+        this.propertyService.post(propertyDto).subscribe((property: Property) => {
           alertify.success(`Successfully Listed Property`);
           this.router.navigate([`edit-property/${property.propertyID}`]);
         })
@@ -125,20 +163,20 @@ export class AddPropertyComponent {
   }
 
   public get IsBasicFormValid(): boolean {
-    return this.PropertyForm.get('propertyName')?.valid! &&
-      this.PropertyForm.get('propertyTypeID')?.valid! &&
-      this.PropertyForm.get('propertyListingTypeID')?.valid! &&
-      this.PropertyForm.get('bedroomCount')?.valid! &&
-      this.PropertyForm.get('bathroomCount')?.valid! &&
-      this.PropertyForm.get('balcony')?.valid! &&
-      this.PropertyForm.get('builtYear')?.valid! &&
-      this.PropertyForm.get('heatSystem')?.valid!
+    return this.BasicInfoForm.get('propertyName')?.valid! &&
+      this.BasicInfoForm.get('propertyTypeID')?.valid! &&
+      this.BasicInfoForm.get('propertyListingTypeID')?.valid! &&
+      this.BasicInfoForm.get('bedroomCount')?.valid! &&
+      this.BasicInfoForm.get('bathroomCount')?.valid! &&
+      this.BasicInfoForm.get('balcony')?.valid! &&
+      this.BasicInfoForm.get('builtYear')?.valid! &&
+      this.BasicInfoForm.get('heatSystem')?.valid!
   }
   public get IsPricingFormValid(): boolean {
-    return this.PropertyForm.get('propertyPrice')?.valid! &&
-      this.PropertyForm.get('grossArea')?.valid! &&
-      this.PropertyForm.get('netArea')?.valid! &&
-      this.PropertyForm.get('dues')?.valid!
+    return this.PricingAndAreaForm.get('propertyPrice')?.valid! &&
+      this.PricingAndAreaForm.get('grossArea')?.valid! &&
+      this.PricingAndAreaForm.get('netArea')?.valid! &&
+      this.PricingAndAreaForm.get('dues')?.valid!
   }
 
 

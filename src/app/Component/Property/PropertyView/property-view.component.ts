@@ -2,7 +2,6 @@ import { CommonModule, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
-import { ImageService } from 'src/app/Service/image.service';
 import { PropertyService } from 'src/app/Service/property.service';
 import {MatTabsModule} from '@angular/material/tabs';
 import { YearPluralPipe } from 'src/app/Pipe/year-plural.pipe';
@@ -18,7 +17,6 @@ export class PropertyViewComponent {
 onInit(){
 }
   private readonly _propertyService=inject(PropertyService);
-  private readonly _imageService=inject(ImageService);
   private readonly activatedRoute=inject(ActivatedRoute)
 
   private readonly propertyID:string=this.activatedRoute.snapshot.params['id'];

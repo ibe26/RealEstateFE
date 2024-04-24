@@ -37,7 +37,7 @@ export class OwnedPropertyService {
     return this.httpClient.delete<JsonResult>(this.domain+`${id}`,{headers:this.headers})
   }
 
-  public imageGet(propertyID:string):Observable<Array<Photo>>{
+  public imageGet(propertyID:number):Observable<Array<Photo>>{
     return this.httpClient.get<Array<Photo>>(this.domainImage+propertyID);
   }
   public imagePost(images:FormData,propertyID:number):Observable<string>{

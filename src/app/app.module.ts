@@ -24,14 +24,15 @@ import { ProfileComponent } from './Component/profile/profile.component';
 import { UnauthorizedPageComponent } from './Component/unauthorized-page/unauthorized-page.component';
 import { UserNamePipe } from './Pipe/user-name.pipe';
 import { PortfolioComponent } from './Component/Property/portfolio/portfolio.component';
-import { NgApexchartsModule } from 'ng-apexcharts';
+import {MatStepperModule} from '@angular/material/stepper';
+import { CdkStepper, CdkStepperModule } from '@angular/cdk/stepper';
+import { OwnedPropertyCardComponent } from './Component/Property/portfolio/owned-property-card/owned-property-card.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     UnauthorizedPageComponent,
-    PortfolioComponent,
   ],
   imports: [
     NgbModule,
@@ -56,9 +57,12 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     LoginComponent,
     ProfileComponent,
     UserNamePipe,
-    NgApexchartsModule
+    MatStepperModule,
+    PortfolioComponent,
+    OwnedPropertyCardComponent,
+    
   ],
-  providers: [],
+  providers: [CdkStepperModule,CdkStepper],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

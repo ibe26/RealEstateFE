@@ -46,7 +46,8 @@ export interface PropertyDTO{
     dateListed:Date,
     builtYear:number,
     floor:number,
-    totalFloor:number
+    totalFloor:number,
+    onListing:boolean
 }
 
 export interface PropertyFilterDTO{
