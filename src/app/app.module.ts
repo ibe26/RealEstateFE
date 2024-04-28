@@ -27,6 +27,7 @@ import { PortfolioComponent } from './Component/Property/portfolio/portfolio.com
 import {MatStepperModule} from '@angular/material/stepper';
 import { CdkStepper, CdkStepperModule } from '@angular/cdk/stepper';
 import { OwnedPropertyCardComponent } from './Component/Property/portfolio/owned-property-card/owned-property-card.component';
+import { AddOwnedPropertyComponent, DialogContentExampleDialog } from './Component/Property/portfolio/add-owned-property/add-owned-property.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { OwnedPropertyCardComponent } from './Component/Property/portfolio/owned
     MatStepperModule,
     PortfolioComponent,
     OwnedPropertyCardComponent,
-    
+    AddOwnedPropertyComponent,
+    DialogContentExampleDialog
   ],
   providers: [CdkStepperModule,CdkStepper],
   bootstrap: [AppComponent]

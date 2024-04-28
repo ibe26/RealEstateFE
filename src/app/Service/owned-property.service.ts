@@ -25,8 +25,8 @@ export class OwnedPropertyService {
     return this.httpClient.get<OwnedProperty>(`${this.domain+id}`)
   }
 
-  public post(ownedPropertyDTO:OwnedPropertyDTO):Observable<OwnedPropertyDTO>{
-    return this.httpClient.post<OwnedPropertyDTO>(this.domain,ownedPropertyDTO,{headers:this.headers})
+  public post(ownedPropertyDTO:OwnedPropertyDTO):Observable<OwnedProperty>{
+    return this.httpClient.post<OwnedProperty>(this.domain,ownedPropertyDTO,{headers:this.headers})
   }
 
   public update(ownedPropertyDTO:OwnedPropertyDTO,id:string):Observable<OwnedPropertyDTO>{
@@ -46,4 +46,6 @@ export class OwnedPropertyService {
   public imageDelete(imageName:string,propertyID:number):Observable<JsonResult>{
     return this.httpClient.delete<JsonResult>(this.domainImage+`?id=${propertyID}&imageName=${imageName}`,{headers:this.headers})
   }
+
+  public ownedPropertyList!:OwnedProperty[];
 }

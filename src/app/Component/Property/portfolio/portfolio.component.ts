@@ -5,6 +5,7 @@ import { OwnedProperty } from 'src/app/Model/OwnedProperty';
 import { Photo } from 'src/app/Model/Photo';
 import { OwnedPropertyService } from 'src/app/Service/owned-property.service';
 import { OwnedPropertyCardComponent } from './owned-property-card/owned-property-card.component';
+import { AddOwnedPropertyComponent } from './add-owned-property/add-owned-property.component';
 Chart.register(...registerables);
 
 @Component({
@@ -12,7 +13,7 @@ Chart.register(...registerables);
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.css'],
   standalone:true,
-  imports:[CommonModule,OwnedPropertyCardComponent]
+  imports:[CommonModule,OwnedPropertyCardComponent,AddOwnedPropertyComponent]
 })
 
 export class PortfolioComponent {

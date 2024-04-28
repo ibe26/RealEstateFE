@@ -1,5 +1,5 @@
 <div class="container ml-5">
-  <div  (ngSubmit)="onSubmit()">
+  <div (ngSubmit)="onSubmit()">
     <mat-stepper [linear]="true" #stepper style="height: 600px;">
       <mat-step [stepControl]="BasicInfoForm" label="Basic Info">
         <ng-container *ngTemplateOutlet="BasicInfoContent"></ng-container>

@@ -39,11 +39,9 @@ export class MainPageComponent implements OnInit{
       }})
     }
   }
-
   
   private userService=inject(UserService);
   public _propertyService=inject(PropertyService);
 
   public User!:User;
-  //public propertyList!:Array<Property>;
 }
