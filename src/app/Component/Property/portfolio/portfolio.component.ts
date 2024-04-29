@@ -18,31 +18,30 @@ Chart.register(...registerables);
 
 export class PortfolioComponent {
 
-  private ownedPropertiesService=inject(OwnedPropertyService);
+  public ownedPropertiesService=inject(OwnedPropertyService);
 
-  public ownedPropertyList:OwnedProperty[]=[];
   public imageList:Photo[]=[];
 
   ngOnInit(): void {
     this.ownedPropertiesService.getList().subscribe(data=>{
 
-      this.ownedPropertyList=data.sort((a,b)=>{
+      this.ownedPropertiesService.ownedPropertyList=data.sort((a,b)=>{
         return b.propertyPrice-a.propertyPrice
       });
       this.RenderChart(data);
     })
   }
 public get getPropertyCount():number{
-  return this.ownedPropertyList.length;
+  return this.ownedPropertiesService.ownedPropertyList.length;
 }
 public get getPropertyValue():number{
   let sum=0;
-  this.ownedPropertyList.forEach(o=>sum+=o.propertyPrice)
+  this.ownedPropertiesService.ownedPropertyList.forEach(o=>sum+=o.propertyPrice)
   return sum;
 }
 public get getPropertyTotalYield():number{
   let sum=0;
-  this.ownedPropertyList.forEach(o=>sum+=o.yield);
+  this.ownedPropertiesService.ownedPropertyList.forEach(o=>sum+=o.yield);
   return sum;
 }
 public get getPropertyAveragePY():number{

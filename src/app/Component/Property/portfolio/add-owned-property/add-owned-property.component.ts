@@ -20,13 +20,13 @@ export class AddOwnedPropertyComponent {
 
   private dialog=inject(MatDialog);
   openDialog() {
-    const dialogRef = this.dialog.open(DialogContentExampleDialog);
+    const dialogRef = this.dialog.open(AddOwnedPropertyDialogContent);
   }
 }
 
 @Component({
-  selector: 'dialog-content-example-dialog',
-  templateUrl: 'dialog-content-example-dialog.html',
+  selector: 'add-owned-property-dialog-content',
+  templateUrl: 'add-owned-property-dialog-content.html',
   standalone: true,
   imports: [
     MatDialogModule,
@@ -38,7 +38,7 @@ export class AddOwnedPropertyComponent {
     PropertyTypeDropdownComponent
   ],
 })
-export class DialogContentExampleDialog {
+export class AddOwnedPropertyDialogContent {
 
   ngOnInit(): void {
     this.userService$.validateToken().subscribe(userID=>{
@@ -53,7 +53,7 @@ export class DialogContentExampleDialog {
   private ownedPropertyService$=inject(OwnedPropertyService);
   private userService$=inject(UserService);
 
-  private photoProperty=new FormData();
+  public photoProperty=new FormData();
 
   public propertyForm:FormGroup=this.formBuilder.group({
     propertyName: [null, [Validators.required]],
@@ -70,12 +70,13 @@ export class DialogContentExampleDialog {
   }
 
   public onSubmit():void{
-    if(this.propertyForm.valid){
+    if(this.propertyForm.valid && this.photoProperty.get('formFile')){
       const ownedPropertyDTO=this.propertyForm.value;
-      console.log(ownedPropertyDTO)
-      console.log(this.propertyForm.value)
       this.ownedPropertyService$.post(ownedPropertyDTO).subscribe(data=>{
-        this.ownedPropertyService$.imagePost(this.photoProperty,data.propertyID).subscribe()
+        this.ownedPropertyService$.imagePost(this.photoProperty,data.propertyID).subscribe();
+        this.ownedPropertyService$.getList().subscribe(data=>{
+          this.ownedPropertyService$.ownedPropertyList=data;
+        })
       })
     }
   }

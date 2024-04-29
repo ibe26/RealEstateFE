@@ -1,24 +1,42 @@
-<div>
+<div (mouseenter)="isHovered=true" (mouseleave)="isHovered=false">
   <mat-card>
     <mat-card-header>
       <mat-card-title-group>
         <mat-card-title>{{ownedProperty.propertyName}}</mat-card-title>
         <mat-card-subtitle style="font-size: larger;">
-            <h2 style="width: max-content; height: fit-content;">Value: {{ownedProperty.propertyPrice|currency}}</h2>
-        </mat-card-subtitle><mat-card-subtitle style="font-size: larger;">
-            <h2 style="width: max-content; height: fit-content;">Yield: {{ownedProperty.yield|currency}}</h2>
-        </mat-card-subtitle><mat-card-subtitle style="font-size: larger;">
-            <h2 style="width: max-content; height: fit-content;">Amortization Period:
-                {{(ownedProperty.priceYieldRatio/12).toFixed(2) +'  Years'}}</h2>
-        </mat-card-subtitle><mat-card-subtitle style="font-size: larger;">
-            <h2 style="width: max-content; height: fit-content;">Yield On Investment:
-                {{(100/ownedProperty.priceYieldRatio).toFixed(2) +'%'}}</h2>
+          <h2 style="width: max-content; height: fit-content;">Value: {{ownedProperty.propertyPrice|currency}}</h2>
         </mat-card-subtitle>
-        <img  mat-card-lg-image  *ngIf="propertyPhoto"[src]="propertyPhoto.url">
+        <mat-card-subtitle style="font-size: larger;">
+          <h2 style="width: max-content; height: fit-content;">Yield: {{ownedProperty.yield|currency}}</h2>
+        </mat-card-subtitle>
+        <mat-card-subtitle style="font-size: larger;">
+          <h2 style="width: max-content; height: fit-content;">Yield On Investment:
+            {{(1200/ownedProperty.priceYieldRatio).toFixed(2) +'%'}}</h2>
+        </mat-card-subtitle>
+        <mat-card-subtitle style="font-size: larger;">
+          <h2 style="width: max-content; height: fit-content;">Amortization Period:
+            {{(ownedProperty.priceYieldRatio/12).toFixed(2) +'  Years'}}</h2>
+        </mat-card-subtitle>
+
+        <div>
+          <div class="row">
+            <img mat-card-lg-image *ngIf="propertyPhoto" [src]="propertyPhoto.url">
+          </div>
+          <div class="row" style="align-self: flex-end;">
+            <div class="mt-2">
+              <app-edit-owned-property [OwnedProperty]="ownedProperty" [isHovered]="isHovered">
+              </app-edit-owned-property>
+              <button (click)="onDelete()" class="ml-1" type="button" [disabled]="!isHovered" mat-raised-button
+                color="warn">
+                <mat-icon class="ml-2" style="scale: 2;">delete</mat-icon>
+              </button>
+
+            </div>
+          </div>
+        </div>
       </mat-card-title-group>
     </mat-card-header>
     <mat-card-content>
-
     </mat-card-content>
   </mat-card>
 </div>

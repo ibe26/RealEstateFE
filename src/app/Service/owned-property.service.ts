@@ -29,11 +29,11 @@ export class OwnedPropertyService {
     return this.httpClient.post<OwnedProperty>(this.domain,ownedPropertyDTO,{headers:this.headers})
   }
 
-  public update(ownedPropertyDTO:OwnedPropertyDTO,id:string):Observable<OwnedPropertyDTO>{
+  public update(ownedPropertyDTO:OwnedPropertyDTO,id:number):Observable<OwnedPropertyDTO>{
     return this.httpClient.put<OwnedPropertyDTO>(this.domain+`${id}`,ownedPropertyDTO,{headers:this.headers})
   }
 
-  public delete (id:string):Observable<JsonResult>{
+  public delete (id:number):Observable<JsonResult>{
     return this.httpClient.delete<JsonResult>(this.domain+`${id}`,{headers:this.headers})
   }
 

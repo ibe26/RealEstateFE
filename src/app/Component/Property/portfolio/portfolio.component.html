@@ -3,7 +3,7 @@
 
   <div class="row">
 
-    <div *ngIf="ownedPropertyList" class="col-lg-4 ml-4 mt-3">
+    <div *ngIf="ownedPropertiesService.ownedPropertyList" class="col-lg-4 ml-4 mt-3">
       <div class="row">
         <h2 style="width: max-content; height: fit-content;">Owned Properties: {{getPropertyCount}}</h2>
       </div>
@@ -11,15 +11,15 @@
         <h2 style="width: max-content; height: fit-content;">Total Value: {{getPropertyValue|currency}}</h2>
       </div>
       <div class="row">
-        <h2 style="width: max-content; height: fit-content;">Total Yield: {{getPropertyTotalYield*12|currency}}</h2>
+        <h2 style="width: max-content; height: fit-content;">Annual Yield: {{getPropertyTotalYield*12|currency}}</h2>
+      </div>
+      <div class="row">
+        <h2 style="width: max-content; height: fit-content;">Annual Yield On Investment:
+          {{(getPropertyAverageYieldPercentage).toFixed(2) +'%'}}</h2>
       </div>
       <div class="row">
         <h2 style="width: max-content; height: fit-content;">Amortization Period:
           {{(getPropertyAveragePY/12).toFixed(2) +'  Years'}}</h2>
-      </div>
-      <div class="row">
-        <h2 style="width: max-content; height: fit-content;">Yield On Investment:
-          {{(getPropertyAverageYieldPercentage).toFixed(2) +'%'}}</h2>
       </div>
     </div>
     <div class="col-lg-3">
@@ -31,7 +31,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-6 mt-3" *ngFor="let property of ownedPropertyList">
+    <div class="col-6 mt-3" *ngFor="let property of ownedPropertiesService.ownedPropertyList">
         <app-owned-property-card [ownedProperty]="property"></app-owned-property-card>
 
     </div>
