@@ -8,7 +8,7 @@
         <h2 style="width: max-content; height: fit-content;">Owned Properties: {{getPropertyCount}}</h2>
       </div>
       <div class="row">
-        <h2 style="width: max-content; height: fit-content;">Total Value: {{getPropertyValue|currency}}</h2>
+        <h2 style="width: max-content; height: fit-content;">Total Value: {{(getPropertyValue|currency)}}</h2>
       </div>
       <div class="row">
         <h2 style="width: max-content; height: fit-content;">Annual Yield: {{getPropertyTotalYield*12|currency}}</h2>
@@ -20,6 +20,14 @@
       <div class="row">
         <h2 style="width: max-content; height: fit-content;">Amortization Period:
           {{(getPropertyAveragePY/12).toFixed(2) +'  Years'}}</h2>
+      </div>
+    <div class="row">
+        <h2 style="width: max-content; height: fit-content;">Value per Area (Gross):
+          {{getValueOverArea.toFixed(2)|currency}}/m²</h2>
+      </div>
+    <div class="row">
+        <h2 style="width: max-content; height: fit-content;">Annual Yield per Area (Gross):
+          {{(12*getYieldOverArea).toFixed(2)|currency}}/m²</h2>
       </div>
     </div>
     <div class="col-lg-3">

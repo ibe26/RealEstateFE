@@ -45,16 +45,11 @@ export class EditOwnedPropertyDialogContent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: { ownedProperty: OwnedProperty }){}
   
   ngOnInit(): void {
-    this.userService$.validateToken().subscribe(userID=>{
-      if(userID){
-        this.propertyForm.controls['userID'].setValue(userID.value);
-      }
-    })
+    
   }
 
   private formBuilder = inject(FormBuilder);
   private ownedPropertyService$=inject(OwnedPropertyService);
-  private userService$=inject(UserService);
 
   public photoProperty=new FormData();
 
@@ -77,7 +72,9 @@ export class EditOwnedPropertyDialogContent {
       const ownedPropertyDTO=this.propertyForm.value;
       this.ownedPropertyService$.update(ownedPropertyDTO,this.data.ownedProperty.propertyID).subscribe(data=>{
         if(this.photoProperty.get('formFile')){
-          this.ownedPropertyService$.imagePost(this.photoProperty,this.data.ownedProperty.propertyID).subscribe();
+          this.ownedPropertyService$.imagePost(this.photoProperty,this.data.ownedProperty.propertyID).subscribe(data=>{
+            window.location.reload();
+          });
         }
         this.ownedPropertyService$.getList().subscribe(data=>{
           this.ownedPropertyService$.ownedPropertyList=data;

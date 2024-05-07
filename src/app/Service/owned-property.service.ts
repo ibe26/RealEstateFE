@@ -20,6 +20,9 @@ export class OwnedPropertyService {
   public getList():Observable<Array<OwnedProperty>>{
     return this.httpClient.get<Array<OwnedProperty>>(this.domain)
   }
+public getListByUser(userID:string):Observable<Array<OwnedProperty>>{
+    return this.httpClient.get<Array<OwnedProperty>>(this.domain+'user/'+userID)
+  }
 
   public getById(id:number):Observable<OwnedProperty>{
     return this.httpClient.get<OwnedProperty>(`${this.domain+id}`)
@@ -40,8 +43,8 @@ export class OwnedPropertyService {
   public imageGet(propertyID:number):Observable<Array<Photo>>{
     return this.httpClient.get<Array<Photo>>(this.domainImage+propertyID);
   }
-  public imagePost(images:FormData,propertyID:number):Observable<string>{
-    return this.httpClient.post<string>(this.domainImage+propertyID,images,{headers:this.headers});
+  public imagePost(images:FormData,propertyID:number):Observable<number>{
+    return this.httpClient.post<number>(this.domainImage+propertyID,images,{headers:this.headers});
   }
   public imageDelete(imageName:string,propertyID:number):Observable<JsonResult>{
     return this.httpClient.delete<JsonResult>(this.domainImage+`?id=${propertyID}&imageName=${imageName}`,{headers:this.headers})

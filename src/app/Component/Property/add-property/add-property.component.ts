@@ -73,6 +73,7 @@ export class AddPropertyComponent {
   public yearList: Array<number> = [];
 
 
+
   public BasicInfoForm:FormGroup=this.formBuilder.group({
     propertyName: [null, [Validators.required]],
     propertyTypeID: [null, [Validators.required]],
@@ -102,6 +103,11 @@ export class AddPropertyComponent {
     quarter: [undefined, [Validators.required]],
   })
 
+  public formJoin:FormGroup=new FormGroup({
+    BasicInfoForm:this.BasicInfoForm,
+    PricingAndAreaForm:this.PricingAndAreaForm,
+    AddressForm:this.AddressForm})
+
   
   public onTypeChange($event: number) {
     this.BasicInfoForm.controls['propertyTypeID'].setValue($event);
@@ -127,8 +133,9 @@ export class AddPropertyComponent {
     this.BasicInfoForm.controls['heatSystem'].setValue($event);
   }
   public onSubmit() {
- 
+    console.log("happened")
     if (this.AddressForm.valid) {
+      console.log("valid")
         const propertyDto: PropertyDTO = {
           propertyName: this.BasicInfoForm.get('propertyName')?.value,
           userID: this.BasicInfoForm.get('userID')?.value,

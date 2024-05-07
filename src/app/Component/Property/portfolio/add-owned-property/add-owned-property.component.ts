@@ -43,7 +43,8 @@ export class AddOwnedPropertyDialogContent {
   ngOnInit(): void {
     this.userService$.validateToken().subscribe(userID=>{
       if(userID){
-        this.propertyForm.controls['userID'].setValue(userID.value);
+        this.userID=userID.value;
+        this.propertyForm.controls['userID'].setValue(this.userID);
       }
     })
     
@@ -52,6 +53,7 @@ export class AddOwnedPropertyDialogContent {
   private formBuilder = inject(FormBuilder);
   private ownedPropertyService$=inject(OwnedPropertyService);
   private userService$=inject(UserService);
+  private userID!:string;
 
   public photoProperty=new FormData();
 
@@ -74,8 +76,9 @@ export class AddOwnedPropertyDialogContent {
       const ownedPropertyDTO=this.propertyForm.value;
       this.ownedPropertyService$.post(ownedPropertyDTO).subscribe(data=>{
         this.ownedPropertyService$.imagePost(this.photoProperty,data.propertyID).subscribe();
-        this.ownedPropertyService$.getList().subscribe(data=>{
+        this.ownedPropertyService$.getListByUser(this.userID).subscribe(data=>{
           this.ownedPropertyService$.ownedPropertyList=data;
+          window.location.reload();
         })
       })
     }

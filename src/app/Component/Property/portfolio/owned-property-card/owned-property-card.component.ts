@@ -8,6 +8,9 @@ import { Photo } from 'src/app/Model/Photo';
 import { OwnedPropertyService } from 'src/app/Service/owned-property.service';
 import alertify from 'alertifyjs';
 import { EditOwnedPropertyComponent } from '../edit-owned-property/edit-owned-property.component';
+import { UserService } from 'src/app/Service/user.service';
+import { User } from 'src/app/Model/User';
+import { LocalStorageHelper } from 'src/app/API';
 
 @Component({
   selector: 'app-owned-property-card',
@@ -21,8 +24,6 @@ import { EditOwnedPropertyComponent } from '../edit-owned-property/edit-owned-pr
     EditOwnedPropertyComponent]
 })
 export class OwnedPropertyCardComponent {
-
-
   @Input() ownedProperty!: OwnedProperty;
 
   private ownedPropertyService$=inject(OwnedPropertyService);
@@ -31,7 +32,9 @@ export class OwnedPropertyCardComponent {
   public isHovered = false;
 
   ngOnInit(): void {
+    
     this.ownedPropertyService$.imageGet(this.ownedProperty.propertyID).subscribe(photoList=>{
+      console.log(photoList)
       this.propertyPhoto=photoList[0];
     })
   }
@@ -40,7 +43,7 @@ export class OwnedPropertyCardComponent {
     alertify.confirm('Confirm Deletion?', () => {
       this.ownedPropertyService$.delete(this.ownedProperty.propertyID).subscribe(() => {
         alertify.success(`Successfully Deleted Property Listing`);
-        this.ownedPropertyService$.getList().subscribe(data=>{
+      this.ownedPropertyService$.getListByUser(this.ownedProperty.userID).subscribe(data=>{
           this.ownedPropertyService$.ownedPropertyList=data;
         });
       })
